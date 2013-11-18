@@ -95,7 +95,30 @@
 <p>
 <HR>
 
-<table border = "0">
+<H1><CENTER>Add Group Member</CENTER></H1>
+
+<FORM NAME="LoginForm" ACTION="AddMember.jsp" METHOD="post" >
+
+<P>Please input your group's name</P>
+<TABLE>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Group ID:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="GroupName" VALUE="Group Name"><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Friend Name:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="FriendName" VALUE="User Name"><BR></TD>
+</TR>
+</TABLE>
+
+<INPUT TYPE="submit" NAME="Submit" VALUE="Add">
+</FORM>
+
+</p>
+<p>
+<HR>
+
+<table border = "5">
 <tr>
 <td>Group ID</td>
 <td>Group Name</td>
