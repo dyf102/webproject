@@ -5,11 +5,9 @@
 <body>
 	<br><br>
 	<%   
-		//String username = (String)session.getAttribute("loged_in");
-String username="hahaha";
+		String username = (String)session.getAttribute("loged_in");
 		String groupName = request.getParameter("DeleteName");
 		String checkName = "select * from groups where " + groupName + " = group_id and user_name = '" + username + "'";
-out.println(checkName);
 		String deleteGroup = "delete from groups where " + groupName + " = group_id";
 
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";

@@ -88,7 +88,7 @@ String username ="hahaha";
 <P>Please input your group's name</P>
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
-<TD><B><I>Group ID:</I></B></TD>
+<TD><B><I>Group Name:</I></B></TD>
 <!--<TD><INPUT TYPE="text" NAME="DeleteName" VALUE="Group Name"><BR></TD>-->
 <TD><select name="DeleteName">
     <%	for (int i=0; i<group_name.size(); i++)
