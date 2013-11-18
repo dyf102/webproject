@@ -10,9 +10,9 @@
 <BODY>
 <%
 		String username = (String)session.getAttribute("loged_in");
-		String getGroup = "select group_id from groups where user_name = '" + username +"'";
-		ArrayList<String> result = new ArrayList<String>();
-		
+		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";
+		ArrayList<String> group_id = new ArrayList<String>();
+		ArrayList<String> group_name = new ArrayList<String>();
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
@@ -44,7 +44,8 @@
 	      stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
               rset1 = stmt.executeQuery(getGroup);
 	      while (rset1.next()){
-			result.add(rset1.getString(1));	
+			group_id.add(rset1.getString(1));	
+			group_name.add(rset1.getString(2));	
 	      }
 	     
               
@@ -93,10 +94,10 @@
 </p>
 <p>
 <HR>
-<P><B>Existing Groups ID:</B></P>
-<%	for (int i=0; i<result.size(); i++)
+<P><B>Existing Groups ID         Group Name</B></P>
+<%	for (int i=0; i<group_id.size(); i++)
 	{
-		out.println("<p>"+result.get(i)+"</p>");
+		out.println("<p>" + group_id.get(i) + group_name.get(i) + "</p>");
 	}
 
 		username = (String)session.getAttribute("loged_in");
