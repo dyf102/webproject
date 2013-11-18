@@ -81,7 +81,7 @@
 <P>Please input your group's name</P>
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
-<TD><B><I>GroupName:</I></B></TD>
+<TD><B><I>Group ID:</I></B></TD>
 <TD><INPUT TYPE="text" NAME="DeleteName" VALUE="Group Name"><BR></TD>
 </TR>
 </TABLE>
@@ -92,7 +92,7 @@
 </p>
 <p>
 <HR>
-<P>Existing Groups</P>
+<P><B>Existing Groups ID:</B></P>
 <%	for (int i=0; i<result.size(); i++)
 	{
 		out.println("<p>"+result.get(i)+"</p>");
