@@ -6,9 +6,9 @@
 	<br><br>
 	<%
 		long id = System.currentTimeMillis();    
-		//String username = (String)session.getAttribute("loged_in");
+		String username = (String)session.getAttribute("loged_in");
 		String groupName = request.getParameter("AddName");
-String username="hahaha";
+//String username="hahaha";
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
 		String addGroup = "insert into groups values(" + id + " , '" + username + "' , '" + groupName + "' , sysdate)";
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
@@ -41,7 +41,7 @@ String username="hahaha";
               m_password);
 	      stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
               rset1 = stmt.executeQuery(checkName);
-	    if (rset1.next()){
+	    if (rset1.next() || groupName.isEmpty()){
 	    	 flag1=true;
 	     }
 	   else	

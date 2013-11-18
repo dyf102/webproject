@@ -99,7 +99,6 @@
 	}
 
 		String username = (String)session.getAttribute("loged_in");
-out.println(username);
 	%>
 </BODY>
 </HTML>
