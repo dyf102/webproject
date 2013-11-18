@@ -11,7 +11,6 @@
 <%
 		String getGroup = "select group_id from groups";
 		ArrayList<String> result = new ArrayList<String>();
-		long idd = System.currentTimeMillis();    
 		
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
@@ -63,9 +62,6 @@
 <P>Please input your group's name</P>
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
-<TD><B><I>Group ID: <%=idd%> </I></B></TD>
-</TR>
-<TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>GroupName:</I></B></TD>
 <TD><INPUT TYPE="text" NAME="AddName" VALUE="Group Name"><BR></TD>
 </TR>
@@ -101,6 +97,9 @@
 	{
 		out.println("<p>"+result.get(i)+"</p>");
 	}
+
+		String username = (String)session.getAttribute("loged_in");
+out.println(username);
 	%>
 </BODY>
 </HTML>
