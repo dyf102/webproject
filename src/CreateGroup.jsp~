@@ -94,13 +94,22 @@
 </p>
 <p>
 <HR>
-<P><B>Existing Groups ID         Group Name</B></P>
+
+<table border = "0">
+<tr>
+<td>Group ID</td>
+<td>Group Name</td>
+</tr>
 <%	for (int i=0; i<group_id.size(); i++)
-	{
-		out.println("<p>" + group_id.get(i) +group_name.get(i)" +</p>");
+	{	%>
+		<tr>
+		<td><%=group_id.get(i)%></td>
+		<td><%=group_name.get(i)%></td>
+		</tr>
+	<%
 	}
 
-		username = (String)session.getAttribute("loged_in");
 	%>
+</table>
 </BODY>
 </HTML>
