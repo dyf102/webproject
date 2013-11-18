@@ -9,7 +9,8 @@
 
 <BODY>
 <%
-		String getGroup = "select group_id from groups";
+		String username = (String)session.getAttribute("loged_in");
+		String getGroup = "select group_id from groups where user_name = '" + username +"'";
 		ArrayList<String> result = new ArrayList<String>();
 		
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
@@ -98,7 +99,7 @@
 		out.println("<p>"+result.get(i)+"</p>");
 	}
 
-		String username = (String)session.getAttribute("loged_in");
+		username = (String)session.getAttribute("loged_in");
 	%>
 </BODY>
 </HTML>
