@@ -4,6 +4,7 @@
 <center>
 <h3>Images Search</h3>
 <form id="cse-search-box" action="http://google.com/cse" autocomplete="on">
+  <input type="hidden" name="ie" value="UTF-8" />
   <input type="text" name="q" size="31" />
   <p><select>
   <option>Last 24 hours</option>
