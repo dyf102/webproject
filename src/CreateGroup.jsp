@@ -9,13 +9,16 @@
 
 <BODY>
 <%
-		String username = (String)session.getAttribute("loged_in");
+		//String username = (String)session.getAttribute("loged_in");
+String username ="hahaha";
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";
+		String getUser = "select user_name from users where user_name <> '" + username + "'";		
 		ArrayList<String> group_id = new ArrayList<String>();
 		ArrayList<String> group_name = new ArrayList<String>();
+		ArrayList<String> user_name = new ArrayList<String>();
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
-
+		
       		String m_userName = "bqi";
        		String m_password = "celiajackjack77";
 
@@ -47,13 +50,15 @@
 			group_id.add(rset1.getString(1));	
 			group_name.add(rset1.getString(2));	
 	      }
-	     
+	      rset1 = stmt.executeQuery(getUser);
+	      while (rset1.next()){
+			user_name.add(rset1.getString(1));	
+	      }
               
 
        } catch(SQLException ex) {
               out.println("SQLException: " +
               ex.getMessage());
-//out.println(ex.getMessage());
        }
 	%>
 <!--This is the login page-->
@@ -84,7 +89,19 @@
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Group ID:</I></B></TD>
-<TD><INPUT TYPE="text" NAME="DeleteName" VALUE="Group Name"><BR></TD>
+<!--<TD><INPUT TYPE="text" NAME="DeleteName" VALUE="Group Name"><BR></TD>-->
+<TD><select name="DeleteName">
+    <%	for (int i=0; i<group_name.size(); i++)
+	{	%>
+		
+		<option value= <%=user_name.get(i)%>> <%=group_name.get(i)%></option>
+		
+	<%
+	}
+
+	%>
+  </select>
+</TD>
 </TR>
 </TABLE>
 
@@ -118,6 +135,7 @@
 <p>
 <HR>
 
+<P><b>Existing Group ID and Group Name</b></P>
 <table border = "5">
 <tr>
 <td>Group ID</td>
@@ -128,6 +146,22 @@
 		<tr>
 		<td><%=group_id.get(i)%></td>
 		<td><%=group_name.get(i)%></td>
+		</tr>
+	<%
+	}
+
+	%>
+</table>
+
+<P><b>Existing Users</b></P>
+<table border = "5">
+<tr>
+<td>User Name</td>
+</tr>
+<%	for (int i=0; i<user_name.size(); i++)
+	{	%>
+		<tr>
+		<td><%=user_name.get(i)%></td>
 		</tr>
 	<%
 	}
