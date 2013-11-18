@@ -41,7 +41,7 @@
               m_password);
 	      stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
               rset1 = stmt.executeQuery(checkName);
-	    if (rset1.next()){
+	    if (rset1.next() || groupName.isEmpty()){
 	    	 flag1=true;
 	     }
 	   else	

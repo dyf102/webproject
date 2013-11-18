@@ -97,7 +97,7 @@
 	{
 		out.println("<p>"+result.get(i)+"</p>");
 	}
-session.setAttribute("loged_in", "a;sldkfj;aslkdfj");
+
 		String username = (String)session.getAttribute("loged_in");
 out.println(username);
 	%>
