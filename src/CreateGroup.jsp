@@ -9,13 +9,14 @@
 
 <BODY>
 <%
-		//String username = (String)session.getAttribute("loged_in");
-String username ="hahaha";
+		String username = (String)session.getAttribute("loged_in");
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";
-		String getUser = "select user_name from users where user_name <> '" + username + "'";		
+		String getUser = "select user_name from users where user_name <> '" + username + "'";	
+		String getFriend ="select gl.friend_id from group_lists gl, groups g where gl.group_id = g.group_id and g.user_name = '" + username + "'";	
 		ArrayList<String> group_id = new ArrayList<String>();
 		ArrayList<String> group_name = new ArrayList<String>();
 		ArrayList<String> user_name = new ArrayList<String>();
+		ArrayList<String> friend_name = new ArrayList<String>();
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 		
@@ -53,6 +54,10 @@ String username ="hahaha";
 	      rset1 = stmt.executeQuery(getUser);
 	      while (rset1.next()){
 			user_name.add(rset1.getString(1));	
+	      }
+	      rset1 = stmt.executeQuery(getFriend);
+	      while (rset1.next()){
+			friend_name.add(rset1.getString(1));	
 	      }
               
 
@@ -119,12 +124,40 @@ String username ="hahaha";
 <P>Please input your group's name</P>
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
-<TD><B><I>Group ID:</I></B></TD>
-<TD><INPUT TYPE="text" NAME="GroupName" VALUE="Group Name"><BR></TD>
+<TD><B><I>Group Name:</I></B></TD>
+<TD><select name="GroupName">
+    <%	for (int i=0; i<group_name.size(); i++)
+	{	%>
+		
+		<option value= <%=group_name.get(i)%>> <%=group_name.get(i)%></option>
+		
+	<%
+	}
+
+	%>
+  </select>
+</TD>
 </TR>
+
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Friend Name:</I></B></TD>
-<TD><INPUT TYPE="text" NAME="FriendName" VALUE="User Name"><BR></TD>
+<TD><select name="FriendName">
+    <%	for (int i=0; i<user_name.size(); i++)
+	{	%>
+		
+		<option value= <%=user_name.get(i)%>> <%=user_name.get(i)%></option>
+		
+	<%
+	}
+
+	%>
+  </select>
+</TD>
+</TR>
+
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Notice:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="Notice" VALUE="Notice"><BR></TD>
 </TR>
 </TABLE>
 
@@ -134,6 +167,62 @@ String username ="hahaha";
 </p>
 <p>
 <HR>
+
+
+<H1><CENTER>Delete Group Member</CENTER></H1>
+
+<FORM NAME="LoginForm" ACTION="DeleteMember.jsp" METHOD="post" >
+
+<P>Please input your group's name</P>
+<TABLE>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Group Name:</I></B></TD>
+<!--<TD><INPUT TYPE="text" NAME="DeleteName" VALUE="Group Name"><BR></TD>-->
+<TD><select name="DeleteName">
+    <%	for (int i=0; i<group_name.size(); i++)
+	{	%>
+		
+		<option value= <%=group_name.get(i)%>> <%=group_name.get(i)%></option>
+		
+	<%
+	}
+
+	%>
+  </select>
+</TD>
+</TR>
+
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Friend Name:</I></B></TD>
+<TD><select name="DeleteName">
+    <%	for (int i=0; i<friend_name.size(); i++)
+	{	%>
+		
+		<option value= <%=friend_name.get(i)%>> <%=friend_name.get(i)%></option>
+		
+	<%
+	}
+
+	%>
+  </select>
+</TD>
+</TR>
+</TABLE>
+
+<INPUT TYPE="submit" NAME="Submit" VALUE="Delete">
+</FORM>
+
+</p>
+<p>
+<HR>
+
+
+
+
+
+
+
+
 
 <P><b>Existing Group ID and Group Name</b></P>
 <table border = "5">

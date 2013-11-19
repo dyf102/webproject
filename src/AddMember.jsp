@@ -6,11 +6,17 @@
 	<br><br>
 	<%  
 		String username = (String)session.getAttribute("loged_in");
-		String groupName = request.getParameter("AddName");
-		String friendName = request.getParameter("AddName");
-//String username="hahaha";
+		String groupName = request.getParameter("GroupName");
+		String friendName = request.getParameter("FriendName");
+		String notice = request.getParameter("Notice");
+		String id="";
+		
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
-		String addGroup = "insert into groups values(" + id + " , '" + username + "' , '" + groupName + "' , sysdate)";
+		String checkName1 = "select * from group_lists where '" + friendName + "' = friend_id";
+		String getID = "select group_id from groups where group_name = '" + groupName + "'";
+		
+		
+
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
@@ -41,11 +47,25 @@
               m_password);
 	      stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
               rset1 = stmt.executeQuery(checkName);
-	    if (rset1.next() || groupName.isEmpty()){
+	    if (!rset1.next() || groupName.isEmpty()){
 	    	 flag1=true;
 	     }
-	   else	
-	     	rset1 = stmt.executeQuery(addGroup);
+	   else	{
+		rset1 = stmt.executeQuery(checkName1);
+		if (rset1.next() || friendName.isEmpty())
+			flag1=true;
+		else{	
+			rset1 = stmt.executeQuery(getID);
+
+			if (rset1.next())
+				id = rset1.getString(1);
+			String addFriend = "insert into group_lists values(" + id + " , '" + friendName + "' , sysdate, '" + notice + "')";
+			rset1 = stmt.executeQuery(addFriend);
+		}
+			
+		
+	   }
+	     	
       
        } catch(SQLException ex) {
               out.println("SQLException: " +
@@ -62,7 +82,7 @@
        if(flag1 == true){
 	      %>
 			<H1><CENTER>Adding Failed</CENTER></H1>
-			<H1><CENTER>Group Name already existed</CENTER></H1>
+			<H1><CENTER>Group Name does not exist OR Friend Name already existed</CENTER></H1>
 	      		<meta http-equiv="refresh" content="3; url = CreateGroup.jsp">
 			
 	      <%
@@ -70,8 +90,7 @@
        else{
 	     %>
 			<H1><CENTER>Adding Success</CENTER></H1>
-			<H1><CENTER>Group id is <%=id%></CENTER></H1>
-			<meta http-equiv="refresh" content="10; url = CreateGroup.jsp">
+			<meta http-equiv="refresh" content="3; url = CreateGroup.jsp">
 	      <%
 	     }
 	%>

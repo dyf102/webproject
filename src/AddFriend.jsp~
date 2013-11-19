@@ -4,10 +4,10 @@
 <html>
 <body>
 	<br><br>
-	<%
-		long id = System.currentTimeMillis();    
+	<%  
 		String username = (String)session.getAttribute("loged_in");
 		String groupName = request.getParameter("AddName");
+		String friendName = request.getParameter("AddName");
 //String username="hahaha";
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
 		String addGroup = "insert into groups values(" + id + " , '" + username + "' , '" + groupName + "' , sysdate)";
