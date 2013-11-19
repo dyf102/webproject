@@ -178,7 +178,7 @@
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Group Name:</I></B></TD>
 <!--<TD><INPUT TYPE="text" NAME="DeleteName" VALUE="Group Name"><BR></TD>-->
-<TD><select name="DeleteName">
+<TD><select name="GroupName">
     <%	for (int i=0; i<group_name.size(); i++)
 	{	%>
 		
@@ -194,7 +194,7 @@
 
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Friend Name:</I></B></TD>
-<TD><select name="DeleteName">
+<TD><select name="FriendName">
     <%	for (int i=0; i<friend_name.size(); i++)
 	{	%>
 		
