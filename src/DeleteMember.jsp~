@@ -82,7 +82,7 @@
        if(flag1 == true){
 	      %>
 			<H1><CENTER>Deleting Failed</CENTER></H1>
-			<H1><CENTER>Group Name does not exist OR Friend Name already existed</CENTER></H1>
+			<H1><CENTER>Group Name OR Friend Name does not exist</CENTER></H1>
 	      		<meta http-equiv="refresh" content="3; url = CreateGroup.jsp">
 			
 	      <%

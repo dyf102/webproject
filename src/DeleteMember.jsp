@@ -20,8 +20,8 @@
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
-      		String m_userName = "bqi";
-       		String m_password = "celiajackjack77";
+      		String m_userName = "c391g3";
+       		String m_password = "C1234567";
 
       		Connection m_con = null;
       		Statement stmt = null;

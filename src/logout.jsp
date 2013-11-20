@@ -4,7 +4,7 @@
 <body bgcolor="#eeeeee" text="#765500">
 <center>
 <%
-	String username = request.getParameter("username");
+	String username = session.getAttribute("loged_in");
 	session.removeAttribute("loged_in");
 	session.invalidate();
 %>

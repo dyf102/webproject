@@ -25,8 +25,8 @@
       		String insertvalue = "INSERT INTO USERS VALUES(?,?,sysdate)";
       		String insertperson = "INSERT INTO persons VALUES(?,?,?,?,?,?)";
       		String checkemail = "SELECT * from persons where email ='"+email+"'";
-      		String m_userName = "bqi";
-       		String m_password = "celiajackjack77";
+      		String m_userName = "c391g3";
+       		String m_password = "C1234567";
 
       		Connection m_con = null;
       		PreparedStatement p = null;

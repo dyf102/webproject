@@ -195,7 +195,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                <form class="sidebar-search" action="extra_search.html" method="POST">
                   <div class="form-container">
                      <div class="input-box">
-                        <a href="javascript:;" class="remove"></a>
+                        <a href="test.jsp" class="remove"></a>
                         <input type="text" placeholder="Search..."/>
                         <input type="button" class="submit" value=" "/>
                      </div>
@@ -226,69 +226,24 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                   <li >
                      <a href="page_portfolio.html">
                      <i class="icon-briefcase"></i>
-                     <span class="badge badge-warning badge-roundless">new</span>Portfolio</a>
-                  </li>
-                  <li >
-                     <a href="page_timeline.html">
-                     <i class="icon-time"></i>
-                     <span class="badge badge-info">4</span>Timeline</a>
-                  </li>
-                  <li >
-                     <a href="page_coming_soon.html">
-                     <i class="icon-cogs"></i>
-                     Coming Soon</a>
-                  </li>
-                  <li >
-                     <a href="page_blog.html">
-                     <i class="icon-comments"></i>
-                     Blog</a>
-                  </li>
-                  <li >
-                     <a href="page_blog_item.html">
-                     <i class="icon-font"></i>
-                     Blog Post</a>
-                  </li>
-                  <li >
-                     <a href="page_news.html">
-                     <i class="icon-coffee"></i>
-                     <span class="badge badge-success">9</span>News</a>
-                  </li>
-                  <li >
-                     <a href="page_news_item.html">
-                     <i class="icon-bell"></i>
-                     News View</a>
-                  </li>
-                  <li >
-                     <a href="page_about.html">
-                     <i class="icon-group"></i>
-                     About Us</a>
-                  </li>
-                  <li >
-                     <a href="page_contact.html">
-                     <i class="icon-envelope-alt"></i>
-                     Contact Us</a>
-                  </li>
-                  <li >
-                     <a href="page_calendar.html">
-                     <i class="icon-calendar"></i>
-                     <span class="badge badge-important">14</span>Calendar</a>
+                     <span class="badge badge-warning badge-roundless">New!</span>Groups</a>
                   </li>
                </ul>
             </li>
             <li class="">
                <a href="javascript:;">
                <i class="icon-map-marker"></i> 
-               <span class="title">Maps</span>
+               <span class="title">Upload</span>
                <span class="arrow "></span>
                </a>
                <ul class="sub-menu">
                   <li >
                      <a href="maps_google.html">
-                     Google Maps</a>
+                     Single Upload</a>
                   </li>
                   <li >
                      <a href="maps_vector.html">
-                     Vector Maps</a>
+                     Multiple Upload</a>
                   </li>
                </ul>
             </li>
