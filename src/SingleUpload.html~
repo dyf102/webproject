@@ -1,0 +1,42 @@
+<html>
+<center><h1>Upload single photo</h1></center>
+<form action="singleUpload.jsp" method="post" enctype
+="multipart/form-data" name="form1" id="form1">
+
+<center>
+   <table border="2">
+       <tr>
+               <td align="right"><b>Place taken:</td>
+                   <td ><input type="text" name="emp_name"></td>
+           </tr>
+           <tr>
+               <td align="right"><b>Time taken:</td>
+                   <td ><input type="text" name="address1"></td>
+                           </tr>
+           <tr>
+               <td align="right"><b>Subject:</td>
+                   <td ><input type="text" name="contact_number"></td>
+           </tr>
+       <tr>
+               <td align="right"><b>Employee Email ID:</td>
+                   <td ><input type="text" name="email_id"></td>
+           </tr>
+                  <tr>
+               <td align="right"><b>Photo </td>
+               <td>
+                       <input name="file" type="file" id="file">
+                   <td>
+           </tr>
+                 <tr>
+                    <td align="center">
+               <input type="submit" name="Submit" value="Submit"/>
+                           <input type="reset" name="Reset" value="Reset"/>
+                        </td>
+                 </tr>
+    </table>
+        </center>
+
+
+</form>
+
+</html>

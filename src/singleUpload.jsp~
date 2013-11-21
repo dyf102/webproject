@@ -1,0 +1,130 @@
+<%@ page import="java.util.*" %>
+<%@ page import="java.servlet.*" %>
+<%@ page import="java.io.*" %>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.servlet.http.*"%>
+<%@ page import="oracle.sql.*"%>
+<%@ page import="oracle.jdbc.*"%>
+<%@ page import="java.awt.Image"%>
+<%@ page import="java.awt.image.BufferedImage"%>
+<%@ page import="javax.imageio.ImageIO"%>
+<%@ page import="java.lang.System" %> 
+
+<center><h1>Your  Profile has been Uploaded</h1></center>
+   
+
+ <%
+	//String username = (String)session.getAttribute("loged_in");
+String username = "hahaha";
+	long id = System.currentTimeMillis();
+	String place = request.getParameter("place");
+	String time = request.getParameter("time");
+	String subject = request.getParameter("subject");
+	String permit = request.getParameter("permit");
+	String name = "c391g3";
+	String password = "C1234567";
+	String drivername = "oracle.jdbc.driver.OracleDriver";
+	String dbstring ="jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+
+ %>
+
+ <%
+	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+ 	if (!isMultipart) {
+ 	} 
+	else {
+   		FileItemFactory factory = new DiskFileItemFactory();
+   		ServletFileUpload upload = new ServletFileUpload(factory);
+   		List items = null;
+   		try {
+   		   items = upload.parseRequest(request);
+   		} catch (FileUploadException e) {
+   			e.printStackTrace();
+   		}
+   		Iterator itr = items.iterator();
+   		while (itr.hasNext()) 
+          	{
+   			FileItem item = (FileItem) itr.next();
+   			if (item.isFormField())
+           		{                               
+                       	} else
+           		{
+    			try {
+  	        		//String itemName = item.getName();
+				InputStream instream = item.getInputStream();
+		
+				BufferedImage img = ImageIO.read(instream);
+				BufferedImage thumbNail = shrink(img, 10);
+				// Connect to the database and create a statement
+          			Connection conn = getConnected(drivername,dbstring, name,password);
+	    			Statement stmt = conn.createStatement();			
+				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + 1 + 
+						", ' " + subject + "' , '" + place + "' , " + "sysdate" + " , null, empty_blob(), empty_blob())");
+
+				String cmd = "SELECT * FROM pictures WHERE photo_id = " + id + " FOR UPDATE";
+				ResultSet rset = stmt.executeQuery(cmd);
+	    			rset.next();
+	    			BLOB myblob = ((OracleResultSet)rset).getBLOB(8);
+				OutputStream outstream = myblob.getBinaryOutputStream();
+	    			ImageIO.write(thumbNail, "png", outstream);
+
+				myblob = ((OracleResultSet)rset).getBLOB(9);
+				outstream = myblob.getBinaryOutputStream();
+	    			ImageIO.write(thumbNail, "png", outstream);
+				/*
+				int size = myblob.getBufferSize();
+	   			byte[] buffer = new byte[size];
+	    			int length = -1;
+	    			while ((length = instream.read(buffer)) != -1)
+					outstream.write(buffer, 0, length);
+	    			*/
+	    			instream.close();
+	    			outstream.close();
+
+            			stmt.executeUpdate("commit");
+            			conn.close();
+
+
+
+     
+   			} catch (Exception e) {
+   				e.getMessage();
+out.println(e.getMessage());
+   			}
+  			 }
+  		 }
+   }
+%>
+
+<%!
+public static Connection getConnected( String drivername,
+					    String dbstring,
+					    String username, 
+					    String password  ) 
+	throws Exception {
+	Class drvClass = Class.forName(drivername); 
+	DriverManager.registerDriver((Driver) drvClass.newInstance());
+	return( DriverManager.getConnection(dbstring,username,password));
+    } 
+
+    public static BufferedImage shrink(BufferedImage image, int n) {
+
+        int w = image.getWidth() / n;
+        int h = image.getHeight() / n;
+
+        BufferedImage shrunkImage =
+            new BufferedImage(w, h, image.getType());
+
+        for (int y=0; y < h; ++y)
+            for (int x=0; x < w; ++x)
+                shrunkImage.setRGB(x, y, image.getRGB(x*n, y*n));
+
+        return shrunkImage;
+    }
+
+   %>
+     </td></tr></table></center>

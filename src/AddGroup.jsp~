@@ -71,7 +71,7 @@
 	     %>
 			<H1><CENTER>Adding Success</CENTER></H1>
 			<H1><CENTER>Group id is <%=id%></CENTER></H1>
-			<meta http-equiv="refresh" content="10; url = CreateGroup.jsp">
+			<meta http-equiv="refresh" content="3; url = CreateGroup.jsp">
 	      <%
 	     }
 	%>

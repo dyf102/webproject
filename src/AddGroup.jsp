@@ -8,7 +8,6 @@
 		long id = System.currentTimeMillis();    
 		String username = (String)session.getAttribute("loged_in");
 		String groupName = request.getParameter("AddName");
-//String username="hahaha";
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
 		String addGroup = "insert into groups values(" + id + " , '" + username + "' , '" + groupName + "' , sysdate)";
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
