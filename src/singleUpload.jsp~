@@ -21,10 +21,12 @@
 	//String username = (String)session.getAttribute("loged_in");
 String username = "hahaha";
 	long id = System.currentTimeMillis();
-	String place = request.getParameter("place");
-	String time = request.getParameter("time");
-	String subject = request.getParameter("subject");
-	String permit = request.getParameter("permit");
+	String place="";
+	String time="";
+	String subject="";
+	String permit="";
+	
+
 	String name = "c391g3";
 	String password = "C1234567";
 	String drivername = "oracle.jdbc.driver.OracleDriver";
@@ -50,23 +52,59 @@ String username = "hahaha";
           	{
    			FileItem item = (FileItem) itr.next();
    			if (item.isFormField())
-           		{                               
+           		{     
+				String name1 = item.getFieldName();
+                  		String value = item.getString();
+                  		if(name1.equals("place"))
+                   		{
+					place = value;
+                           	}
+                          	if(name1.equals("time"))
+                          	{  
+					time = value;
+                                }
+                          	if(name1.equals("subject"))
+                          	{  
+					subject = value;
+                                }
+                          	if(name1.equals("permit"))
+                          	{	
+					permit = value;
+                                }
+		                          
                        	} else
            		{
     			try {
   	        		//String itemName = item.getName();
-				InputStream instream = item.getInputStream();
-		
+				InputStream instream = item.getInputStream();		
 				BufferedImage img = ImageIO.read(instream);
 				BufferedImage thumbNail = shrink(img, 10);
 				// Connect to the database and create a statement
-          			Connection conn = getConnected(drivername,dbstring, name,password);
-	    			Statement stmt = conn.createStatement();			
-				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + 1 + 
-						", ' " + subject + "' , '" + place + "' , " + "sysdate" + " , null, empty_blob(), empty_blob())");
 
-				String cmd = "SELECT * FROM pictures WHERE photo_id = " + id + " FOR UPDATE";
-				ResultSet rset = stmt.executeQuery(cmd);
+				String getGroup = "select group_id from groups where group_name = '" + permit + "' and user_name = '" + username + "'" ;
+          			Connection conn = getConnected(drivername,dbstring, name,password);
+	    			Statement stmt = conn.createStatement();
+				ResultSet rset;
+
+				if (permit.equals("private"))
+				{
+					permit = "2";
+				}
+				else if (permit.equals("public"))
+				{
+					permit = "1";
+				}
+				else 
+				{
+					rset = stmt.executeQuery(getGroup);
+					if (rset.next())
+						permit = rset.getString(1);
+				}
+				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
+						", '" + subject + "' , '" + place + "' , " + "sysdate" + " , null, empty_blob(), empty_blob())");
+
+				String cmd = "SELECT * FROM images WHERE photo_id = " + id + " FOR UPDATE";
+				rset = stmt.executeQuery(cmd);
 	    			rset.next();
 	    			BLOB myblob = ((OracleResultSet)rset).getBLOB(8);
 				OutputStream outstream = myblob.getBinaryOutputStream();
@@ -74,7 +112,7 @@ String username = "hahaha";
 
 				myblob = ((OracleResultSet)rset).getBLOB(9);
 				outstream = myblob.getBinaryOutputStream();
-	    			ImageIO.write(thumbNail, "png", outstream);
+	    			ImageIO.write(img, "png", outstream);
 				/*
 				int size = myblob.getBufferSize();
 	   			byte[] buffer = new byte[size];
@@ -93,7 +131,6 @@ String username = "hahaha";
      
    			} catch (Exception e) {
    				e.getMessage();
-out.println(e.getMessage());
    			}
   			 }
   		 }

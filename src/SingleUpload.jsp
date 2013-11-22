@@ -77,8 +77,8 @@ String username="hahaha";
        <tr>
                <td align="right"><b>Permitted:</td>
                    <td ><select name="permit">
-	<option value= private > private </option>
-	<option value= public > public </option>
+	<option value= "private" > private </option>
+	<option value= "public" > public </option>
     <%	for (int i=0; i<group_name.size(); i++)
 	{	%>
 		
