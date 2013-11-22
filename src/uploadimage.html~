@@ -9,7 +9,7 @@
 	Photo 4.<input type="file" name="pic4"><br>
 	Photo 5.<input type="file" name="pic5"><br>
 	<input type="submit" value="Start">
-	<input>
+	<input type="reset" value="Reset">
 </form>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <%@page contentType="text/html"%>
 <html>
 <head><title>Login successful-Photos Keeper</title></head>
-<meta http-equiv="refresh" content="3; url = CreateGroup.jsp">
+<meta http-equiv="refresh" content="3; url = layout_blank_page.jsp">
 <body>
 <center>
 <h2>Login successful</h2>

@@ -152,7 +152,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <li class="dropdown user">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                <img alt="" src="assets/img/avatar1_small.jpg"/>
-               <span class="username"> <%=request.getParameter("uname")%></span>
+               <span class="username"> <%=session.getAttribute("loged_in")%></span>
                <i class="icon-angle-down"></i>
                </a>
                <ul class="dropdown-menu">

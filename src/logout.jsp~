@@ -1,16 +1,19 @@
 <html><head>
 <title>Logout page</title>
+<meta http-equiv="refresh" content="3; url = login.html">
+<%@ page import="java.util.*" %> 
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.lang.System" %> 
 </head>
-<body bgcolor="#eeeeee" text="#765500">
+
 <center>
 <%
-	String username = session.getAttribute("loged_in");
+	String username = (String)session.getAttribute("loged_in");
 	session.removeAttribute("loged_in");
 	session.invalidate();
 %>
-<h1>Thank you for using PhotoUploader! Goodbye! <%= username %>!</h1>
-
-<img src="goodbye.jpg">
+<h4><%= username %> Successful Logout,redirect to login !</h4>
+<img src="images/goodbye.jpg">
 <br>
 <a href="login.html">login</a>
 </center></body></html>
