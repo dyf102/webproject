@@ -1,3 +1,6 @@
+<%@ page import="java.util.*" %> 
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.lang.System" %> 
 <http>
 <head><title>Search </title><%String username = (String)session.getAttribute("loged_in");%></head>
 <body>
@@ -10,7 +13,7 @@
 <tbody>
 <tr>
 <th>Keywords (separate by comma):</th>
-<td><input name="KEYWORDS" maxlength="50" type="text"></td>
+<td><input name="KEYWORDS" maxlength="50" type="text" value=<%=(String)request.getParameter("key")%>></td>
 </tr>
 <tr>
 <th>Time Periods (06-NOV-2012, 09-NOV-2012, ...):</th>

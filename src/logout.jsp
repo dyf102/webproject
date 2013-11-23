@@ -9,7 +9,7 @@
 <%
 	String username = (String)session.getAttribute("loged_in");
 	if(username == null)
-		username = "Guest"
+		username = "Guest";
 	session.removeAttribute("loged_in");
 	session.invalidate();
 %>

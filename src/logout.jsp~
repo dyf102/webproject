@@ -5,10 +5,11 @@
 <%@ page import="java.sql.*" %> 
 <%@ page import="java.lang.System" %> 
 </head>
-
 <center>
 <%
 	String username = (String)session.getAttribute("loged_in");
+	if(username == null)
+		username = "Guest";
 	session.removeAttribute("loged_in");
 	session.invalidate();
 %>

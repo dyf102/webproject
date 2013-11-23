@@ -67,7 +67,6 @@
 		    rset.close();
 			if(owner.equals(username) || username.equals("admin"))
 				owned = true;
-
 			%>
 			<br><img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>"><br>
  			<%

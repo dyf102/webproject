@@ -1,19 +1,15 @@
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
-<%@ page import="oracle.jdbc.*"%>
 <%@ page import="java.lang.System"%>
+
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
-    pageEncoding="US-ASCII"%>
+	pageEncoding="US-ASCII"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-</head>
-<body>
-<%		
+	<%
 		String username = (String) session.getAttribute("loged_in");
-		ArrayList<String> thumbnailArray = new ArrayList<String>();
+		String thumbnail_id = request.getParameter("photo_id");
+		String PHOTO_ID = thumbnail_id;
 		String TABLE_NAME;
 		//query fields initialization
 		TABLE_NAME = "IMAGES";
@@ -28,12 +24,15 @@
 		Statement stmt = null;
 		ResultSet imgResult = null;
 
+		byte[] thumbnail = null; 
 		/*SQL STATEMENTS*/
-		String getImgSqlStmt = " SELECT PHOTO_ID,PERMITTED FROM IMAGES WHERE OWNER_NAME = '"+username+"'";
+		String getImgSqlStmt = "SELECT * FROM " + TABLE_NAME
+				+ "WHERE PHOTO_ID = '" + PHOTO_ID + "'";
 		/*SQL STATEMENTS*/
 		
 		/*Declarations for two images */
-		//Blob thumbnail_blob = null;
+		OutputStream os = null;
+		Blob thumbnail_blob = null;
 		/*Declarations for two images */
 
 		/*Declarations for each descriptive infomation 
@@ -54,31 +53,33 @@
 			System.err.println(e.getMessage());
 
 		}
+
 		try {
 			m_con = DriverManager.getConnection(m_url, m_userName,
 					m_password);
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-			out.println(getImgSqlStmt);
+
 			imgResult = stmt.executeQuery(getImgSqlStmt);
-			while(imgResult.next()) {
-				String id = String.valueOf(imgResult.getLong(1));
-				//out.println(id);
-				thumbnailArray.add(id);
+			if(imgResult.next()) {
+				thumbnail_blob = imgResult.getBlob(8);
+				thumbnail = thumbnail_blob.getBytes(1,(int)thumbnail_blob.length());
+				response.setContentType("image/jpg");
+				os = response.getOutputStream();
+				os.write(thumbnail);
+				os.flush();
+				os.close();
+			}else{
+				out.println("image not found ");
 			}
 
-			for(int i = 0; i< thumbnailArray.size();i++){
-				%>
-			<p><img src="displayblob.jsp?photo_id =<%=thumbnailArray.get(i)%> WIDTH=50 HEIGHT=50>></p>
-				<%
-			}
 		} catch (SQLException e) {
 			out.println("SQLException: " + e.getMessage());
-		}finally{
-			imgResult.close();
-			stmt.close();
-			m_con.close();	
 		}
- %>
-</body>
-</html>
+		finally{
+			stmt.close();
+			imgResult.close();
+			m_con.close();
+		
+		}
+	%>

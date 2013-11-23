@@ -79,7 +79,7 @@
 			    out.println("<br>Permission of the photo: Public");
 			    if (owned)
 			    	out.println("<a href=\"edit_image_info.jsp?image_info="+is_permitted+"&info_content="+permitted+
-			    						"&photo_id="+photo_id+"&username="+username+"\">edit</a>");
+			    						"&photo_id="+photo_id+"&username="+username+"\">edit</a>");displayblob
 			}
 			else if (permitted == 2){
  			    out.println("<br>Permission of the photo: Private");

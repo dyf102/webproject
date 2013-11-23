@@ -27,11 +27,11 @@ ResultSet rs = null;
 			return;	
 		}	
 		// display the image	
-		response.setContentType("image/gif");	
-		OutputStream out = response.getOutputStream();	
-		out.write(imgData);			
-		out.flush();	
-		out.close();
+		response.setContentType("image/jpg");	
+		OutputStream o = response.getOutputStream();	
+		o.write(imgData);			
+		o.flush();	
+		o.close();
 		con.close();
 	}catch (Exception e) {
 		out.println("Unable To Display image");	

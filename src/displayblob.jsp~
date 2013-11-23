@@ -27,7 +27,7 @@ ResultSet rs = null;
 			return;	
 		}	
 		// display the image	
-		response.setContentType("image/gif");	
+		response.setContentType("image/jpg");	
 		OutputStream out = response.getOutputStream();	
 		out.write(imgData);			
 		out.flush();	

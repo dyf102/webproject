@@ -1,12 +1,12 @@
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
-<%@ page import="oracle.sql.*"%>
+<%@ page import="java.sql.*"%>
 <%@ page import="oracle.jdbc.*"%>
 <%@ page import="java.lang.System"%>
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
     pageEncoding="US-ASCII"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html>lastname
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 </head>
@@ -28,14 +28,12 @@
 		Statement stmt = null;
 		ResultSet imgResult = null;
 
-		byte[] thumbnail = null; 
 		/*SQL STATEMENTS*/
-		String getImgSqlStmt = "SELECT * FROM " + TABLE_NAME + "WHERE OWNER_NAME = '"+username+"'";
+		String getImgSqlStmt = " SELECT PHOTO_ID,PERMITTED FROM IMAGES WHERE OWNER_NAME = '"+username+"'";
 		/*SQL STATEMENTS*/
 		
 		/*Declarations for two images */
-		OutputStream os = null;
-		Blob thumbnail_blob = null;
+		//Blob thumbnail_blob = null;
 		/*Declarations for two images */
 
 		/*Declarations for each descriptive infomation 
@@ -61,22 +59,25 @@
 					m_password);
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-
+			out.println(getImgSqlStmt);
 			imgResult = stmt.executeQuery(getImgSqlStmt);
 			while(imgResult.next()) {
-				String id = String.valueOf(imgResult.getInt(1));
+				String id = String.valueOf(imgResult.getLong(1));
+				//out.println(id);
 				thumbnailArray.add(id);
 			}
 
 			for(int i = 0; i< thumbnailArray.size();i++){
 				%>
-					<br><img src="displaythumbnail.jsp?thumbnail_id =<%=thumbnailArray.get(i)%>"><br>
+			<p><img src="displayblob.jsp?photo_id =<%=thumbnailArray.get(i)%> WIDTH=50 HEIGHT=50>></p>
 				<%
 			}
-			
-			
 		} catch (SQLException e) {
 			out.println("SQLException: " + e.getMessage());
+		}finally{
+			imgResult.close();
+			stmt.close();
+			m_con.close();	
 		}
  %>
 </body>

@@ -14,7 +14,6 @@
 <%
         if(request.getParameter("bSearch") != null)
         {
-
           	//security check
 	    	String loged_in = null;
 	    	
@@ -154,7 +153,6 @@
 	        	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, 
                                             ResultSet.CONCUR_READ_ONLY);
 		        rset = stmt.executeQuery(sql);
-		        out.println(sql);
         	}
         	catch(Exception ex){
     	        
@@ -179,8 +177,7 @@
 		  	 	results = true;
 				%>
 				<a href="display_image.jsp?photo_id=<%= photo_id %>&username=<%= username %>">
-				<img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>" WIDTH=50 HEIGHT=50></a>
- 					<%
+				<img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>" WIDTH=50 HEIGHT=50></a>	<%
 		  	    }
 	    	}
         	conn.close();
@@ -194,6 +191,7 @@ You are logged in as <a href="personal_info.jsp?username=<%= username %>"><%= us
 <a href="welcome.jsp?username=<%= username %>">Home</a>
 </br>
 <%
+        }
         }
 %>
 </body>
