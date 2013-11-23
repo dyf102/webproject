@@ -66,10 +66,6 @@
        		catch(Exception  e){}
        }
        if(flag == true){
-       	      String previous = session.getAttribute("loged_in");
-       	      if (previous!=null){
-       	      	session.invalidate();
-       	      }
        	      session.setAttribute("loged_in",userName);
 	      %>
 	      <jsp:forward page="login_success.jsp">

@@ -25,7 +25,7 @@ String username = "hahaha";
 	String time="";
 	String subject="";
 	String permit="";
-	
+	String description="";
 
 	String name = "c391g3";
 	String password = "C1234567";
@@ -71,6 +71,10 @@ String username = "hahaha";
                           	{	
 					permit = value;
                                 }
+				if(name1.equals("description"))
+				{
+					description = value;
+				}
 		                          
                        	} else
            		{
@@ -78,7 +82,7 @@ String username = "hahaha";
   	        		//String itemName = item.getName();
 				InputStream instream = item.getInputStream();		
 				BufferedImage img = ImageIO.read(instream);
-				BufferedImage thumbNail = shrink(img, 10);
+				BufferedImage thumbNail = shrink(img, 2);
 				// Connect to the database and create a statement
 
 				String getGroup = "select group_id from groups where group_name = '" + permit + "' and user_name = '" + username + "'" ;
@@ -101,7 +105,10 @@ String username = "hahaha";
 						permit = rset.getString(1);
 				}
 				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
-						", '" + subject + "' , '" + place + "' , " + "sysdate" + " , null, empty_blob(), empty_blob())");
+						", '" + subject + "' , '" + place + "' , " + "sysdate" + ", '" + description + "', empty_blob(), empty_blob())");
+
+out.println("insert into images values (" + id + ", '" + username + "' , " + permit + 
+						", '" + subject + "' , '" + place + "' , " + "sysdate" + ", '" + description + "', empty_blob(), empty_blob())");
 
 				String cmd = "SELECT * FROM images WHERE photo_id = " + id + " FOR UPDATE";
 				rset = stmt.executeQuery(cmd);
@@ -120,6 +127,22 @@ String username = "hahaha";
 	    			while ((length = instream.read(buffer)) != -1)
 					outstream.write(buffer, 0, length);
 	    			*/
+
+rset = stmt.executeQuery("select * from images where photo_id = " + id);
+rset.next();
+Blob aaa = rset.getBlob(9);
+Blob bbb = rset.getBlob(8);			
+byte[] pict = bbb.getBytes(1,(int)bbb.length());
+response.setContentType("image/jpg");
+OutputStream o = response.getOutputStream();
+%>
+<table>
+<tr>Image</td><td><%o.write(pict);%></tr>
+<%o.flush();%>
+<tr><p>Image</td><td><%o.write(pict);%></tr>
+</table>
+<%o.flush();
+o.close();
 	    			instream.close();
 	    			outstream.close();
 
@@ -130,7 +153,7 @@ String username = "hahaha";
 
      
    			} catch (Exception e) {
-   				e.getMessage();
+   				out.println(e.getMessage());
    			}
   			 }
   		 }

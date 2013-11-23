@@ -1,0 +1,64 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>File Upload Applet</title></head><body>
+
+
+	
+	<table border="0" cellpadding="7" cellspacing="0" width="640">
+		<tbody><tr><td colspan="2" align="center"><font color="red" face="arial" size="+1"><b><u>JUpload - File Upload Applet</u></b></font></td></tr>
+		<tr height="20"></tr>
+		<tr><td colspan="2" bgcolor="#3f7c98"><center><font color="#ffffff">FileUpload Applet</font></center></td></tr>
+		<tr><td colspan="2" align="center">
+
+<applet code="applet-basic_files/wjhk.JUploadApplet" name="JUpload" archive="File%20Upload%20Applet_files/wjhk.jar" mayscript="" height="300" width="640">
+    <param name="CODE" value="wjhk.jupload2.JUploadApplet">
+    <param name="ARCHIVE" value="wjhk.jupload.jar">
+    <param name="type" value="application/x-java-applet;version=1.4">
+    <param name="scriptable" value="false">    
+    <param name="postURL" value="http://um02.cs.ualberta.ca:16260/webproject/src/parseRequest.jsp?URLParam=URL+Parameter+Value">
+    <param name="nbFilesPerRequest" value="2">    
+Java 1.4 or higher plugin required.
+</applet>
+
+			</td>
+		</tr>
+        </tbody></table>
+        
+        <p>
+                </p><h1>What this example does</h1>
+This example uploads a directory into a user specified folder on the
+server. The upload applet calls a JSP page which stores the files in
+the folder on the server. In order to adapt this example to your
+project you will need to modify the JSP page so that it can store the
+files to the database as opposed to a temporary folder. <p></p>
+
+        <p>
+                </p><h1>Setting up this in your account.</h1><br>
+                Follow the instructions below:
+                <list>
+                        <li>Download the Applet jar file <a href="http://www.cs.ualberta.ca/%7Eyuan/servlets/source/wjhk.jupload.jar">from here</a>. Place it the top folder (proj1).</li>
+                        <li>
+                            Download 
+<a href="http://www.cs.ualberta.ca/%7Eyuan/servlets/source/commons-fileupload.jar">fileUpload
+                jar</a>, <a href="http://www.cs.ualberta.ca/%7Eyuan/servlets/source/commons-io.jar">Commons-io jar</a>files and place them under the WEB-INF/lib folder. If you don't have the lib folder, create it. 
+                        </li>
+                        <li>
+                           Create a JSP page to handle incoming
+                file. <a href="http://www.cs.ualberta.ca/%7Eyuan/servlets/source/parseRequest.jsp">Sample</a>
+                        </li>
+                        <li>
+                           Create an HTML page containing the Applet. You can view source on this page to get the code for that.
+                        </li>
+                        <li>
+Lastly you need to modify the parameter postUrl of the applet to
+specify the URL of the JSP page you created<br>
+For example I am running this example on machine ui01 and the JSP page to handle the file upload is called parseRequest.jsp<br>
+Therefore I set the postUrl parameter value to be
+http://ui01.cs.ualberta.ca:16340/proj1/parseRequest.jsp?URLParam=URL+Parameter+Value
+<br>
+You do this in the html page containing the applet. Look at the source of this page.
+                        </li>
+                </list>
+        <p></p>
+Prepared By Varun Grover at University of Alberta.
+
+ </body></html>

@@ -33,6 +33,9 @@ String username = "hahaha";
 	String drivername = "oracle.jdbc.driver.OracleDriver";
 	String dbstring ="jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 
+	Connection conn = getConnected(drivername,dbstring, name,password);
+	Statement stmt = conn.createStatement();
+	ResultSet rset;
 %>
 
 <%	

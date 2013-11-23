@@ -74,6 +74,10 @@ String username="hahaha";
                <td align="right"><b>Subject:</td>
                    <td ><input type="text" name="subject"></td>
            </tr>
+	   <tr>
+               <td align="right"><b>Description:</td>
+                   <td ><input type="text" name="description"></td>
+           </tr>
        <tr>
                <td align="right"><b>Permitted:</td>
                    <td ><select name="permit">
