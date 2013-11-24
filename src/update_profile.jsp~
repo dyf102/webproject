@@ -57,10 +57,16 @@ try {
 		}
 		else{
 			%>
-			<p>Information change successfull</p>
-			<jsp:forward page="logout.jsp"/>
+			<p>Information change successfull,Please login again!</p>
+			<meta http-equiv="refresh" content="1; url = extra_profile.jsp">
 			<%
 		}
+	}
+	else{
+	%>
+			<p>Password could not be none!!</p>
+			<jsp:forward page="extra_profile.jsp"/>
+			<%
 	}
 	}
 	catch(Exception e){

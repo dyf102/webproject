@@ -4,11 +4,11 @@
 
 <html>
 <body>
-
-
 <%
-		//String username = (String)session.getAttribute("loged_in");
-String username="hahaha";
+		String username = (String)session.getAttribute("loged_in");
+		if(username == null){%>
+			<meta http-equiv="refresh" content="0; url = login.html">
+		<%}
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";		
 		ArrayList<String> group_id = new ArrayList<String>();
 		ArrayList<String> group_name = new ArrayList<String>();
@@ -52,10 +52,6 @@ String username="hahaha";
               ex.getMessage());
        }
 	%>
-
-
-
-
 <center><h1>Upload single photo</h1></center>
 <form action="singleUpload.jsp" method="post" enctype
 ="multipart/form-data" name="form1" id="form1">
@@ -72,7 +68,7 @@ String username="hahaha";
                            </tr>
            <tr>
                <td align="right"><b>Subject:</td>
-                   <td ><input type="text" name="subject"></td>
+                   <td ><input type="text" nahttp://www.worldofwebcraft.com/blog.php?id=1me="subject"></td>
            </tr>
 	   <tr>
                <td align="right"><b>Description:</td>

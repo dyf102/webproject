@@ -7,6 +7,11 @@
 	<%
 		long id = System.currentTimeMillis();    
 		String username = (String)session.getAttribute("loged_in");
+		if(username == null){
+		%>
+			<meta http-equiv="refresh" content="0; url = login.html">
+		<%
+		}
 		String groupName = request.getParameter("AddName");
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
 		String addGroup = "insert into groups values(" + id + " , '" + username + "' , '" + groupName + "' , sysdate)";

@@ -6,6 +6,11 @@
 	<br><br>
 	<%   
 		String username = (String)session.getAttribute("loged_in");
+		if(username == null){
+%>
+	<meta http-equiv="refresh" content="0; url = login.html">
+<%
+}
 		String groupName = request.getParameter("DeleteName");
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
 		String deleteGroup = "delete from groups where '" + groupName + "' = group_name";

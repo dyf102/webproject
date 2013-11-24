@@ -14,11 +14,16 @@
 <%@ page import="javax.imageio.ImageIO"%>
 <%@ page import="java.lang.System" %> 
 
-<center><h1>Your  Profile has been Uploaded</h1></center>
+<center><h1>Your  image has been Uploaded</h1></center>
    
 
  <%
 	String username = (String)session.getAttribute("loged_in");
+	if(username == null){
+%>
+	<meta http-equiv="refresh" content="0; url = login.html">
+<%
+}
 //String username = "hahaha";
 	long id = System.currentTimeMillis();
 	String place="";
@@ -62,7 +67,7 @@
                           	if(name1.equals("time"))
                           	{  
 					time = value;
-                                }
+                                }setContentType
                           	if(name1.equals("subject"))
                           	{  
 					subject = value;
@@ -119,9 +124,9 @@ out.println("insert into images values (" + id + ", '" + username + "' , " + per
 
 				myblob = ((OracleResultSet)rset).getBLOB(9);
 				outstream = myblob.getBinaryOutputStream();
-	    			ImageIO.write(img, "png", outstream);
+	    			ImageIO.write(img, "jpg", outstream);
 				/*
-				int size = myblob.getBufferSize();
+				int size = msetContentTypeyblob.getBufferSize();
 	   			byte[] buffer = new byte[size];
 	    			int length = -1;
 	    			while ((length = instream.read(buffer)) != -1)
@@ -139,6 +144,7 @@ OutputStream o = response.getOutputStream();
 <table>
 <tr>Image</td><td><%o.write(pict);%></tr>
 <%o.flush();%>
+<head><h2>Upload Successful</h2></head>
 <tr><p>Image</td><td><%o.write(pict);%></tr>
 </table>
 <%o.flush();

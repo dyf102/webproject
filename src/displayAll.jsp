@@ -3,16 +3,16 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="oracle.jdbc.*"%>
 <%@ page import="java.lang.System"%>
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-    pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>lastname
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 </head>
 <body>
 <%		
 		String username = (String) session.getAttribute("loged_in");
+		
 		ArrayList<String> thumbnailArray = new ArrayList<String>();
 		String TABLE_NAME;
 		//query fields initialization
@@ -59,18 +59,16 @@
 					m_password);
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-			out.println(getImgSqlStmt);
+			//out.println(getImgSqlStmt);
 			imgResult = stmt.executeQuery(getImgSqlStmt);
+			%><table border="1">
+			<%
 			while(imgResult.next()) {
 				String id = String.valueOf(imgResult.getLong(1));
-				//out.println(id);
-				thumbnailArray.add(id);
-			}
-
-			for(int i = 0; i< thumbnailArray.size();i++){
 				%>
-			<p><img src="displayblob.jsp?photo_id =<%=thumbnailArray.get(i)%> WIDTH=50 HEIGHT=50>></p>
-				<%
+				<tr><td><%=id%></td>
+			<td><a href="displayblob.jsp?photo_id=<%=id%>"><img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td><tr>				<%
+				//thumbnailArray.add(id);
 			}
 		} catch (SQLException e) {
 			out.println("SQLException: " + e.getMessage());

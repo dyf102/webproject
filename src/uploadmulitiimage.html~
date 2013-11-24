@@ -7,7 +7,7 @@
     <param name="ARCHIVE" value="wjhk.jupload.jar">
     <param name="type" value="application/x-java-applet;version=1.4">
     <param name="scriptable" value="false">    
-    <param name="postURL" value="http://um02.cs.ualberta.ca:16260/webproject/src/parseRequest.jsp?URLParam=URL+Parameter+Value">
+    <param name="postURL" value="http://um11.cs.ualberta.ca:16260/webproject/src/parseRequest.jsp?URLParam=URL+Parameter+Value">
     <param name="nbFilesPerRequest" value="2">    
 Java 1.4 or higher plugin required.
 </applet>

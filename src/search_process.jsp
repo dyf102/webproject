@@ -16,7 +16,7 @@
         {
           	//security check
 	    	String loged_in = null;
-	    	
+	
 	    	loged_in = (String)session.getAttribute( "loged_in" );
 	    	if(loged_in == null){
 	    	    out.println("<h3>You have not logged in to the PhotoUploader. Please log in.</h3>");

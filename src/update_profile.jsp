@@ -62,6 +62,12 @@ try {
 			<%
 		}
 	}
+	else{
+	%>
+			<p>Password could not be none!!</p>
+			<meta http-equiv="refresh" content="1; url = extra_profile.jsp">
+			<%
+	}
 	}
 	catch(Exception e){
 		out.println(e.getMessage());

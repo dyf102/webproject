@@ -6,6 +6,11 @@
 	<br><br>
 	<%  
 		String username = (String)session.getAttribute("loged_in");
+		if(username == null){
+%>
+	<meta http-equiv="refresh" content="0; url = login.html">
+<%
+}
 		String groupName = request.getParameter("GroupName");
 		String friendName = request.getParameter("FriendName");
 

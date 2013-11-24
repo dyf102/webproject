@@ -222,7 +222,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                </a>
                <ul class="sub-menu">
                   <li >
-                     <a href="page_portfolio.html">
+                     <a href="CreateGroup.jsp">
                      <i class="icon-briefcase"></i>
                      <span class="badge badge-warning badge-roundless">New!</span>Groups</a>
                   </li>
@@ -236,7 +236,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                </a>
                <ul class="sub-menu">
                   <li >
-                     <a href="maps_google.html">
+                     <a href="SingleUpload.jsp">
                      Single Upload</a>
                   </li>
                   <li >
@@ -246,7 +246,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                </ul>
             </li>
             <li class="last ">
-               <a href="charts.html">
+               <a href="data_analysis.jsp">
                <i class="icon-bar-chart"></i> 
                <span class="title">Statistic Data</span>
                </a>

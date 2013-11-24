@@ -5,9 +5,21 @@
 <%@ page import="java.lang.System"%>
 <html><head><title>Chenge user information</title>
 <script>
-function formReset()
+function validateForm()
 {
-document.getElementById("frm1").reset();
+var x=document.forms["myForm"]["new password"].value;
+if (x==null || x=="")
+  {
+  alert("New Password must be filled out");
+  return false;
+  }
+  var conf = confirm("Are you sure you want to change your information?");
+    if(conf == false){
+	return false;
+    }
+}
+function formReset(){
+	document.forms["myForm"].reset();
 }
 </script>
 </head>
@@ -58,9 +70,8 @@ try {
 		stmt.close();
 		m_con.close();	
 	}
-
 %>
-<form id = "frm1" action="update_profile.jsp" >
+<form name = "myForm" action="update_profile.jsp" method="post" onsubmit="return validateForm()">
 First name: <input type="text" name="firstname" value = "<%=firstname%>"><br>
 Last name: <input type="text" name="lastname"value = "<%=lastname%>"><br>
 address name: <input type="text" name="address"value = "<%=address%>"><br>

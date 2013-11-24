@@ -10,6 +10,11 @@
 <BODY>
 <%
 		String username = (String)session.getAttribute("loged_in");
+		if(username == null){
+%>
+	<meta http-equiv="refresh" content="0; url = login.html">
+<%
+}
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";
 		String getUser = "select user_name from users where user_name <> '" + username + "'";	
 		String getFriend ="select gl.friend_id from group_lists gl, groups g where gl.group_id = g.group_id and g.user_name = '" + username + "'";	
