@@ -17,6 +17,7 @@
 		String id="";
 		
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
+out.println(checkName);
 		String checkName1 = "select * from group_lists where '" + friendName + "' = friend_id";
 		String getID = "select group_id from groups where group_name = '" + groupName + "'";
 		
@@ -25,8 +26,8 @@
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
-      		String m_userName = "bqi";
-       		String m_password = "celiajackjack77";
+      		String m_userName = "c391g3";
+       		String m_password = "C1234567";
 
       		Connection m_con = null;
       		Statement stmt = null;
@@ -54,6 +55,7 @@
               rset1 = stmt.executeQuery(checkName);
 	    if (!rset1.next() || groupName.isEmpty()){
 	    	 flag1=true;
+out.println("111");
 	     }
 	   else	{
 		rset1 = stmt.executeQuery(checkName1);

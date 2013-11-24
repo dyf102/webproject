@@ -6,6 +6,11 @@
 	<br><br>
 	<%  
 		String username = (String)session.getAttribute("loged_in");
+		if(username == null){
+%>
+	<meta http-equiv="refresh" content="0; url = login.html">
+<%
+}
 		String groupName = request.getParameter("GroupName");
 		String friendName = request.getParameter("FriendName");
 		String notice = request.getParameter("Notice");
@@ -20,8 +25,8 @@
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
-      		String m_userName = "bqi";
-       		String m_password = "celiajackjack77";
+      		String m_userName = "c391g3";
+       		String m_password = "C1234567";
 
       		Connection m_con = null;
       		Statement stmt = null;
@@ -49,6 +54,7 @@
               rset1 = stmt.executeQuery(checkName);
 	    if (!rset1.next() || groupName.isEmpty()){
 	    	 flag1=true;
+out.println("111");
 	     }
 	   else	{
 		rset1 = stmt.executeQuery(checkName1);

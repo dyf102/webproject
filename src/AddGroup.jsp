@@ -7,6 +7,7 @@
 	<%
 		long id = System.currentTimeMillis();    
 		String username = (String)session.getAttribute("loged_in");
+
 		if(username == null){
 		%>
 			<meta http-equiv="refresh" content="0; url = login.html">
@@ -15,11 +16,12 @@
 		String groupName = request.getParameter("AddName");
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
 		String addGroup = "insert into groups values(" + id + " , '" + username + "' , '" + groupName + "' , sysdate)";
+
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
-      		String m_userName = "bqi";
-       		String m_password = "celiajackjack77";
+      		String m_userName = "c391g3";
+       		String m_password = "C1234567";
 
       		Connection m_con = null;
       		Statement stmt = null;
@@ -45,6 +47,7 @@
               m_password);
 	      stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
               rset1 = stmt.executeQuery(checkName);
+
 	    if (rset1.next() || groupName.isEmpty()){
 	    	 flag1=true;
 	     }
