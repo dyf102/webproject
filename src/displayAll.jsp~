@@ -29,7 +29,9 @@
 		ResultSet imgResult = null;
 
 		/*SQL STATEMENTS*/
-		String getImgSqlStmt = " SELECT PHOTO_ID,PERMITTED FROM IMAGES WHERE OWNER_NAME = '"+username+"'";
+		String getImgSqlStmt = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME = '"+username+"' AND PERMITTED = 2";
+		String getPublicImg = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME <> '"+username+"' AND PERMITTED = 1";
+		String getAdminImg = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME";
 		/*SQL STATEMENTS*/
 		
 		/*Declarations for two images */
@@ -55,25 +57,78 @@
 
 		}
 		try {
+		    
 			m_con = DriverManager.getConnection(m_url, m_userName,
 					m_password);
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-			//out.println(getImgSqlStmt);
-			imgResult = stmt.executeQuery(getImgSqlStmt);
-			%><table border="1">
+			
+			%>
+			  <table border="1">
+			  <tr><td><b><%=username%>'s Album</b></td></tr>
+			  <tr>
 			<%
+			
+		    if(!username.equals("admin")){
+			imgResult = stmt.executeQuery(getImgSqlStmt);
 			while(imgResult.next()) {
 				String id = String.valueOf(imgResult.getLong(1));
 				%>
-				<tr><td><%=id%></td><a href="displayblob.jsp?photo_id=<%=id%>">
-			<td><img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td><tr>				<%
-				//thumbnailArray.add(id);
+			<td><a href="displayblob.jsp?photo_id=<%=id%>">
+			<img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td>				
+			<% } %>
+			</tr>
+			<tr>
+			<%
+				imgResult = stmt.executeQuery(getImgSqlStmt);
+				while(imgResult.next()) {
+					String id = String.valueOf(imgResult.getLong(1));
+			%>
+				<td><%=id%></td><%
+				}	
+			%>
+			</tr>
+			<tr>
+				<td><b>Public Album</b></td>
+		        </tr>
+		        </tr>
+				<% 
+					
+					imgResult = stmt.executeQuery(getPublicImg);
+					while(imgResult.next()) {
+					String id = String.valueOf(imgResult.getLong(1));
+				%>
+					<td><a href="displayblob.jsp?photo_id=<%=id%>">
+					<img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td>				
+					<% } %>
+			</tr>
+			</table>
+		<%
+			}else{
+			
+		%>
+				<table border="1">
+				<% 
+					
+					imgResult = stmt.executeQuery(getPublicImg);
+					while(imgResult.next()) {
+					String id = String.valueOf(imgResult.getLong(1));
+				%>
+					<tr><td><%=id%></td>
+					<td><a href="displayblob.jsp?photo_id=<%=id%>">
+					<img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td></tr>				
+					<% } %>
+			
+			
+<%
 			}
+				
 		} catch (SQLException e) {
 			out.println("SQLException: " + e.getMessage());
 		}finally{
-			imgResult.close();
+			if(imgResult != null){
+				imgResult.close();
+			}
 			stmt.close();
 			m_con.close();	
 		}
