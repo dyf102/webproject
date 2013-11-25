@@ -110,10 +110,7 @@
 						permit = rset.getString(1);
 				}
 				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
-						", '" + subject + "' , '" + place + "' , " + "sysdate" + ", '" + description + "', empty_blob(), empty_blob())");
-
-out.println("insert into images values (" + id + ", '" + username + "' , " + permit + 
-						", '" + subject + "' , '" + place + "' , " + "sysdate" + ", '" + description + "', empty_blob(), empty_blob())");
+						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
 
 				String cmd = "SELECT * FROM images WHERE photo_id = " + id + " FOR UPDATE";
 				rset = stmt.executeQuery(cmd);
