@@ -1,15 +1,20 @@
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.sql.*"%>
+<%@ page import="oracle.jdbc.*"%>
 <%@ page import="java.lang.System"%>
-
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-	pageEncoding="US-ASCII"%>
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-	<%
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+</head>
+<body>
+
+<%		
 		String username = (String) session.getAttribute("loged_in");
-		String thumbnail_id = request.getParameter("thumbnail_id");
-		String PHOTO_ID = thumbnail_id;
+		String photo_id = (String) request.getParameter("photo_id");
+		ArrayList<String> thumbnailArray = new ArrayList<String>();
 		String TABLE_NAME;
 		//query fields initialization
 		TABLE_NAME = "IMAGES";
@@ -24,20 +29,9 @@
 		Statement stmt = null;
 		ResultSet imgResult = null;
 
-		byte[] thumbnail = null; 
 		/*SQL STATEMENTS*/
-		String getImgSqlStmt = "SELECT * FROM " + TABLE_NAME
-				+ "WHERE PHOTO_ID = '" + PHOTO_ID + "'";
+		String getImgSqlStmt = "SELECT PERMITTED,SUBJECT,PLACE,TIMING,DESCRIPTION FROM IMAGES WHERE PHOTO_ID =" +photo_id ;
 		/*SQL STATEMENTS*/
-		
-		/*Declarations for two images */
-		OutputStream os = null;
-		Blob thumbnail_blob = null;
-		/*Declarations for two images */
-
-		/*Declarations for each descriptive infomation 
-		  that will be displayed during the session*/
-
 		String ownerNameValue = null;
 		String subjectValue = null;
 		String placeValue = null;
@@ -53,33 +47,37 @@
 			System.err.println(e.getMessage());
 
 		}
-
+		
 		try {
+		    
 			m_con = DriverManager.getConnection(m_url, m_userName,
 					m_password);
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-
 			imgResult = stmt.executeQuery(getImgSqlStmt);
 			if(imgResult.next()) {
-				thumbnail_blob = imgResult.getBlob(8);
-				thumbnail = thumbnail_blob.getBytes(1,(int)thumbnail_blob.length());
-				response.setContentType("image/jpg");
-				os = response.getOutputStream();
-				os.write(thumbnail);
-				os.flush();
-				os.close();
-			}else{
-				out.println("image not found ");
+				String permission_info = String.valueOf(imgResult.getLong(1));
+				String subject_info = imgResult.getString(2);
+				
+				String place_info = imgResult.getString(3);
+				String timing_info = imgResult.getDate(4).toString();
+			
+		%>
+			<img src="displayblob.jsp?photo_id=<%=photo_id%>&type=hd">				
+		<%
 			}
-
+				
 		} catch (SQLException e) {
 			out.println("SQLException: " + e.getMessage());
-		}
-		finally{
+		}finally{
+			if(imgResult != null){
+				imgResult.close();
+			}
 			stmt.close();
-			imgResult.close();
-			m_con.close();
-		
+			m_con.close();	
 		}
-	%>
+ %>
+
+			
+		
+		

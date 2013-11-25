@@ -31,7 +31,7 @@
 		/*SQL STATEMENTS*/
 		String getImgSqlStmt = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME = '"+username+"' AND PERMITTED = 2";
 		String getPublicImg = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME <> '"+username+"' AND PERMITTED = 1";
-		String getAdminImg = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME";
+		String getAdminImg = "SELECT PHOTO_ID FROM IMAGES";
 		/*SQL STATEMENTS*/
 		
 		/*Declarations for two images */
@@ -74,7 +74,7 @@
 			while(imgResult.next()) {
 				String id = String.valueOf(imgResult.getLong(1));
 				%>
-			<td><a href="displayblob.jsp?photo_id=<%=id%>">
+			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>">
 			<img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td>				
 			<% } %>
 			</tr>
@@ -98,7 +98,7 @@
 					while(imgResult.next()) {
 					String id = String.valueOf(imgResult.getLong(1));
 				%>
-					<td><a href="displayblob.jsp?photo_id=<%=id%>">
+					<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>">
 					<img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td>				
 					<% } %>
 			</tr>
@@ -110,12 +110,12 @@
 				<table border="1">
 				<% 
 					
-					imgResult = stmt.executeQuery(getPublicImg);
+					imgResult = stmt.executeQuery(getAdminImg);
 					while(imgResult.next()) {
 					String id = String.valueOf(imgResult.getLong(1));
 				%>
 					<tr><td><%=id%></td>
-					<td><a href="displayblob.jsp?photo_id=<%=id%>">
+					<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>">
 					<img src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50" HEIGHT="50"></a></td></tr>				
 					<% } %>
 			
