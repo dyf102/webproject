@@ -17,10 +17,9 @@
 		String id="";
 		
 		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
-		String checkName1 = "select * from group_lists where '" + friendName + "' = friend_id";
+		
 		String getID = "select group_id from groups where group_name = '" + groupName + "'";
-		
-		
+			
 
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
@@ -57,14 +56,17 @@
 
 	     }
 	   else	{
+		
+		rset1 = stmt.executeQuery(getID);		
+			if (rset1.next())
+				id = rset1.getString(1);
+		String checkName1 = "select * from group_lists where '" + friendName + "' = friend_id and group_id = " + id;
 		rset1 = stmt.executeQuery(checkName1);
+
 		if (rset1.next() || friendName.isEmpty())
 			flag1=true;
 		else{	
-			rset1 = stmt.executeQuery(getID);
-
-			if (rset1.next())
-				id = rset1.getString(1);
+			
 			String addFriend = "insert into group_lists values(" + id + " , '" + friendName + "' , sysdate, '" + notice + "')";
 			rset1 = stmt.executeQuery(addFriend);
 		}
