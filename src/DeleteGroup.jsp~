@@ -50,7 +50,7 @@
 		 
 	     }
 	   else	{
-		rset1 = stmt.executeQuery("select group_id from group where '" + groupName + "' = group_name");
+		rset1 = stmt.executeQuery("select group_id from groups where '" + groupName + "' = group_name");
 		rset1.next();		
 		String groupID = rset1.getString(1);
 		String deleteGroupList = "delete from group_lists where group_id = " + groupID;
