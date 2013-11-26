@@ -30,6 +30,7 @@
 
 		Connection m_con = null;
 		Statement stmt = null;
+		Statement stmt2 = null;
 		ResultSet imgResult = null;
 		ResultSet groupResult = null;
 		ResultSet currentGroupResult = null;
@@ -65,8 +66,9 @@
 					m_password);
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-					
-			currentGroupResult = stmt.executeQuery(getCurrentGroup);	
+			stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);		
+			currentGroupResult = stmt2.executeQuery(getCurrentGroup);	
 			groupResult = stmt.executeQuery(getGroupName);
 			
 			while(groupResult.next()){
