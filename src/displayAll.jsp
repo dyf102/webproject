@@ -29,7 +29,7 @@
 		ResultSet imgResult = null;
 
 		/*SQL STATEMENTS*/
-		String getImgSqlStmt = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME = '"+username+"' AND PERMITTED = 2";
+		String getImgSqlStmt = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME = '"+username+"'";
 		String getPublicImg = "SELECT PHOTO_ID FROM IMAGES WHERE OWNER_NAME <> '"+username+"' AND PERMITTED = 1";
 		String getAdminImg = "SELECT PHOTO_ID FROM IMAGES";
 		/*SQL STATEMENTS*/

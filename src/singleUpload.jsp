@@ -60,6 +60,9 @@
            		{     
 				String name1 = item.getFieldName();
                   		String value = item.getString();
+                  		if(value == null){
+                  			value = "";
+                  		}
                   		if(name1.equals("place"))
                    		{
 					place = value;
