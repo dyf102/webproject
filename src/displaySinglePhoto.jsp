@@ -13,9 +13,7 @@
 
 <%		
 		String username = (String) session.getAttribute("loged_in");
-		out.println(username);
 		String photo_id = (String) request.getParameter("photo_id");
-		out.println(photo_id);
 		session.setAttribute("photo_id",photo_id);
 		
 		String TABLE_NAME;

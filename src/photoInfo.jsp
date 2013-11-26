@@ -15,7 +15,6 @@
 		
 		String username = (String) session.getAttribute("loged_in");
 		String photo_id = (String) session.getAttribute("photo_id");
-		
 		String subject_info, place_info,timing_info,permission_info,desc_info;
 		
 		permission_info = request.getParameter("permission_info");
@@ -40,7 +39,7 @@
 
 		/*SQL STATEMENTS*/
 		
-		String getGroupID = "SELECT GROUP_ID FROM GROUPS WHERE GROUP_NAME = '"+permission_info+"'AND USER_NAME ='"+username+"'";
+		String getGroupID = "SELECT GROUP_ID FROM GROUPS WHERE GROUP_NAME = '"+permission_info+"'AND USER_NAME ='"+username+"' AND USER_NAME IS NOT NULL";
 		String updateInfo = "UPDATE IMAGES SET PERMITTED = ?,SUBJECT = ?, PLACE = ?, TIMING = ?,DESCRIPTION = ? WHERE PHOTO_ID ="+photo_id;
 		
 		
@@ -72,8 +71,16 @@
 			groupIdResult = stmt.executeQuery(getGroupID);
 			
 			if(groupIdResult.next()){
-				group_id = groupIdResult.getLong(1);
 				
+				group_id = groupIdResult.getLong(1);
+			}else{
+				if(permission_info.equals("public")){
+					group_id = 1;
+				}else{
+					group_id = 2;
+				}
+				
+			}
 				PreparedStatement pstmt = m_con.prepareStatement(updateInfo);
 				pstmt.setLong(1,group_id);
 				pstmt.setString(2,subject_info);
@@ -93,7 +100,7 @@
 					<meta http-equiv="refresh" content="1; url = displayAll.jsp">
 					<%
 				}
-			}
+			
 			
 			
 		}catch (SQLException e){

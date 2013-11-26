@@ -13,9 +13,7 @@
 
 <%		
 		String username = (String) session.getAttribute("loged_in");
-		out.println(username);
 		String photo_id = (String) request.getParameter("photo_id");
-		out.println(photo_id);
 		session.setAttribute("photo_id",photo_id);
 		
 		String TABLE_NAME;
@@ -87,10 +85,6 @@
 				}else if (value == 2){
 					permission_info = "private";
 				}
-				if (currentGroupResult==null){
-					out.println("dasdsadasdsdsadsadasdsasdasda");
-					return;
-					}
 				
 				if(currentGroupResult.next()){
 					permission_info = currentGroupResult.getString(1);
