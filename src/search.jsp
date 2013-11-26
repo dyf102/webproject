@@ -18,7 +18,7 @@ key = "";
 </tr>
 <tr>
 <th>Time Periods:</th>
-<td><input name="TIMEPER" maxlength="80" type="text" width = "400" placeholder="01-JAN-2013 to 31-JAN-2013"></td>
+<td><input name="TIMEPER" maxlength="80" type="text" width = "400" placeholder="01-JAN-2013,31-JAN-2013"></td>
 </tr>
 <tr>
 <th>Order by:   </th>
