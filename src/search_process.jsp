@@ -177,7 +177,7 @@
 		  	 	results = true;
 				%>
 				<a href="display_image.jsp?photo_id=<%= photo_id %>&username=<%= username %>">
-				<img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>" WIDTH=50 HEIGHT=50></a>	<%
+				<img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>&type=thumbnail" WIDTH="50" HEIGHT="50"></a>	<%
 		  	    }
 	    	}
         	conn.close();

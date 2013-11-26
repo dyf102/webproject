@@ -16,7 +16,7 @@
         {
           	//security check
 	    	String loged_in = null;
-	    	
+	
 	    	loged_in = (String)session.getAttribute( "loged_in" );
 	    	if(loged_in == null){
 	    	    out.println("<h3>You have not logged in to the PhotoUploader. Please log in.</h3>");
@@ -175,9 +175,10 @@
 		  	    //displays the results user has permission to see
 		  	    if (rsetpermit != null && rsetpermit.next()){
 		  	 	results = true;
+		  	 	out.println(photo_id);
 				%>
 				<a href="display_image.jsp?photo_id=<%= photo_id %>&username=<%= username %>">
-				<img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>" WIDTH=50 HEIGHT=50></a>	<%
+				<img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>&type=thumbnail" WIDTH="50" HEIGHT="50"></a>	<%
 		  	    }
 	    	}
         	conn.close();

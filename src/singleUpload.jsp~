@@ -16,7 +16,7 @@
 
 <center><h1>Your  image has been Uploaded</h1></center>
    
-
+<table>
  <%
 	String username = (String)session.getAttribute("loged_in");
 	if(username == null){
@@ -29,7 +29,7 @@
 	String place="";
 	String time="";
 	String subject="";
-	String permit="";
+	String permit="private";
 	String description="";
 
 	String name = "c391g3";
@@ -53,6 +53,7 @@
    			e.printStackTrace();
    		}
    		Iterator itr = items.iterator();
+   		Connection conn = getConnected(drivername,dbstring, name,password);
    		while (itr.hasNext()) 
           	{
    			FileItem item = (FileItem) itr.next();
@@ -67,7 +68,7 @@
                           	if(name1.equals("time"))
                           	{  
 					time = value;
-                                }setContentType
+                                }
                           	if(name1.equals("subject"))
                           	{  
 					subject = value;
@@ -83,6 +84,7 @@
 		                          
                        	} else
            		{
+           			id++;
     			try {
   	        		//String itemName = item.getName();
 				InputStream instream = item.getInputStream();		
@@ -91,7 +93,7 @@
 				// Connect to the database and create a statement
 
 				String getGroup = "select group_id from groups where group_name = '" + permit + "' and user_name = '" + username + "'" ;
-          			Connection conn = getConnected(drivername,dbstring, name,password);
+          			
 	    			Statement stmt = conn.createStatement();
 				ResultSet rset;
 
@@ -110,7 +112,7 @@
 						permit = rset.getString(1);
 				}
 				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
-						", '" + subject + "' , '" + place + "' , " + time + ", '" + description + "', empty_blob(), empty_blob())");
+						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
 
 				String cmd = "SELECT * FROM images WHERE photo_id = " + id + " FOR UPDATE";
 				rset = stmt.executeQuery(cmd);
@@ -130,27 +132,25 @@
 					outstream.write(buffer, 0, length);
 	    			*/
 
-rset = stmt.executeQuery("select * from images where photo_id = " + id);
+rset = stmt.executeQuery("select THUMBNAIL from images where photo_id = " + id);
 rset.next();
-Blob aaa = rset.getBlob(9);
-Blob bbb = rset.getBlob(8);			
+//Blob aaa = rset.getBlob(9);
+Blob bbb = rset.getBlob(1);			
 byte[] pict = bbb.getBytes(1,(int)bbb.length());
 response.setContentType("image/jpg");
 OutputStream o = response.getOutputStream();
 %>
-<table>
+
 <tr>Image</td><td><%o.write(pict);%></tr>
 <%o.flush();%>
-<head><h2>Upload Successful</h2></head>
 <tr><p>Image</td><td><%o.write(pict);%></tr>
-</table>
 <%o.flush();
 o.close();
 	    			instream.close();
 	    			outstream.close();
 
             			stmt.executeUpdate("commit");
-            			conn.close();
+            			
 
 
 
@@ -160,9 +160,10 @@ o.close();
    			}
   			 }
   		 }
+  		 conn.close();
    }
 %>
-
+</table>
 <%!
 public static Connection getConnected( String drivername,
 					    String dbstring,

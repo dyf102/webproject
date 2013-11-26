@@ -11,8 +11,13 @@
 	<%
 		String name = request.getParameter("fullname");
 		String name_split[] = name.split(" ");
-		firstname = name_split[0];
-		lastname = name_split[1];
+		if(name_split.length !=2){
+			firstname = name_split[0];
+			lastname = "";
+		}else{
+			firstname = name_split[0];
+			lastname = name_split[1];
+		}
 		username = request.getParameter("username");
 		password = request.getParameter("password");
 		phonenumber = request.getParameter("phone");
@@ -48,26 +53,22 @@
        }
 	 try
 	 {
-	 out.println("dasdasdasdasas");
 	      m_con = DriverManager.getConnection(m_url, m_userName,
               m_password);
               m_con.setAutoCommit(false);
 	      stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
               rset1 = stmt.executeQuery(checkusername);
               m_con.commit();
-	    out.println("dasdasdasdasas"+checkusername);
 	    if (rset1 != null&&rset1.next()){
 	    	exist_flag = true ;
 	     }
 	     else{
 	     	rset1 = stmt.executeQuery(checkemail);
 	     	m_con.commit();
-	     	out.println("dasdasdasdasas");
 	     	if (rset1 != null&&rset1.next()){
 	    		exist_flag = true ;
 	     	}
 	     	else{
-	     	out.println("dasdasdasdasas");
 	     		p = m_con.prepareStatement(insertvalue);
 	     		p.setString(1,username);
 	     		p.setString(2,password);

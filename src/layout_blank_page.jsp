@@ -209,9 +209,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             </li>
 
             <li class="tooltips" data-placement="left" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
-               <a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend" target="_blank">
+               <a href="help.html" target="_blank">
                <i class="icon-gift"></i> 
-               <span class="title">Frontend Theme</span>
+               <span class="title">Help</span>
                </a>
             </li>
             <li class="">
@@ -240,7 +240,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                      Single Upload</a>
                   </li>
                   <li >
-                     <a href="maps_vector.html">
+                     <a href="uploadmulitiimage.html">
                      Multiple Upload</a>
                   </li>
                </ul>
