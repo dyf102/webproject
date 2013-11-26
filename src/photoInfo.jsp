@@ -40,7 +40,7 @@
 
 		/*SQL STATEMENTS*/
 		
-		String getGroupID = "SELECT GROUP_ID FROM GROUPS WHERE GROUP_NAME = '"+permission_info+"'";
+		String getGroupID = "SELECT GROUP_ID FROM GROUPS WHERE GROUP_NAME = '"+permission_info+"'AND USER_NAME ='"+username+"'";
 		String updateInfo = "UPDATE IMAGES SET PERMITTED = ?,SUBJECT = ?, PLACE = ?, TIMING = ?,DESCRIPTION = ? WHERE PHOTO_ID ="+photo_id;
 		
 		
@@ -49,7 +49,7 @@
 		String subjectValue = null;
 		String placeValue = null;
 		String descriptionValue = null;
-		int group_id ;
+		long group_id ;
 
 		try {
 			Class drvClass = Class.forName(m_driverName);
@@ -72,10 +72,10 @@
 			groupIdResult = stmt.executeQuery(getGroupID);
 			
 			if(groupIdResult.next()){
-				group_id = (int)groupIdResult.getLong(1);
+				group_id = groupIdResult.getLong(1);
 				
 				PreparedStatement pstmt = m_con.prepareStatement(updateInfo);
-				pstmt.setInt(1,group_id);
+				pstmt.setLong(1,group_id);
 				pstmt.setString(2,subject_info);
 				
 				pstmt.setString(3,place_info);
@@ -97,7 +97,7 @@
 			
 			
 		}catch (SQLException e){
-				out.println("SQLException: " + e.getMessage());
+				out.println("SQLException:PhotoInfo.jsp " + e.getMessage());
 		}finally{
 			
 				if(groupIdResult != null){

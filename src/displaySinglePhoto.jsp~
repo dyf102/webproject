@@ -13,7 +13,9 @@
 
 <%		
 		String username = (String) session.getAttribute("loged_in");
+		out.println(username);
 		String photo_id = (String) request.getParameter("photo_id");
+		out.println(photo_id);
 		session.setAttribute("photo_id",photo_id);
 		
 		String TABLE_NAME;
@@ -30,12 +32,15 @@
 		Statement stmt = null;
 		ResultSet imgResult = null;
 		ResultSet groupResult = null;
+		ResultSet currentGroupResult = null;
 		
 		ArrayList<String> groupNames = new ArrayList<String>();
 
 		/*SQL STATEMENTS*/
 		String getImgSqlStmt = "SELECT PERMITTED,SUBJECT,PLACE,TIMING,DESCRIPTION FROM IMAGES WHERE PHOTO_ID =" +photo_id ;
 		String getGroupName = "SELECT GROUP_NAME FROM GROUPS WHERE USER_NAME = '"+username+"'";
+		
+		String getCurrentGroup = "SELECT GROUP_NAME FROM IMAGES A,GROUPS B WHERE A.PERMITTED = B.GROUP_ID AND PHOTO_ID ="+photo_id;
 		/*SQL STATEMENTS*/
 		String permission_info ="";
 		String subject_info = "";
@@ -61,6 +66,7 @@
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 					
+			currentGroupResult = stmt.executeQuery(getCurrentGroup);	
 			groupResult = stmt.executeQuery(getGroupName);
 			
 			while(groupResult.next()){
@@ -70,6 +76,7 @@
 			
 			imgResult = stmt.executeQuery(getImgSqlStmt);
 			
+			
 			if(imgResult.next()) {
 				long value = imgResult.getLong(1);
 				
@@ -77,6 +84,10 @@
 					permission_info = "public";
 				}else if (value == 2){
 					permission_info = "private";
+				}
+				
+				if(currentGroupResult.next()){
+					permission_info = currentGroupResult.getString(1);
 				}
 				
 				if(imgResult.getString(2) != null){
@@ -101,7 +112,7 @@
 					<option name = "private" value= "private" > private </option>
 					<option name = "private" value= "public" > public </option>
 				<%for(int i = 0;i < groupNames.size();i++){%>
-					<option value =<%=groupNames.get(i)%>> <%=groupNames.get(i)%></option>
+					<option value ="<%=groupNames.get(i)%>"> <%=groupNames.get(i)%></option>
 				<%}%>
 				</select>
 				Subject: <input type = "text" name = "subject_info" value =<%=subject_info%> ><br>
@@ -119,10 +130,16 @@
 				
 				
 		} catch (SQLException e) {
-			out.println("SQLException: " + e.getMessage());
+			out.println("SQLException: DisplaySinglePhoto.jsp" + e.getMessage());
 		}finally{
 			if(imgResult != null){
 				imgResult.close();
+				
+			}else if(currentGroupResult != null){
+				currentGroupResult.close();
+				
+			}else if(groupResult != null){
+				groupResult.close();
 			}
 			stmt.close();
 			m_con.close();	

@@ -13,6 +13,13 @@
 <%		
 		String username = (String) session.getAttribute("loged_in");
 		
+		if(username == null ){
+			username = "";
+		%>
+			<p>Unauthorized access</p>
+			<meta http-equiv="refresh" content="1; url = login.html">
+		<%
+		}
 		ArrayList<String> thumbnailArray = new ArrayList<String>();
 		String TABLE_NAME;
 		//query fields initialization
@@ -63,13 +70,16 @@
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 			
-			%>
+			
+		   
+		    if(!username.equals("admin")){
+		    	
+		    	%>
 			  <table border="1">
 			  <tr><td><b><%=username%>'s Album</b></td></tr>
 			  <tr>
 			<%
 			
-		    if(!username.equals("admin")){
 			imgResult = stmt.executeQuery(getImgSqlStmt);
 			while(imgResult.next()) {
 				String id = String.valueOf(imgResult.getLong(1));

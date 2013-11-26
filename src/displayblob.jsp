@@ -3,7 +3,6 @@
 <%@ page import= "java.util.* "%>
 <%@ page import= "java.lang.System.* "%>
 <% 
-//String username = request.getParameter("username");
 String photo_id = request.getParameter("photo_id");
 String type = request.getParameter("type");
 Blob image = null;
