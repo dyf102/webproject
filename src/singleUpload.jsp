@@ -114,6 +114,8 @@
 					if (rset.next())
 						permit = rset.getString(1);
 				}
+				out.println("insert into images values (" + id + ", '" + username + "' , " + permit + 
+						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
 				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
 						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
 

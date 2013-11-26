@@ -64,7 +64,7 @@
            </tr>
            <tr>
                <td align="right"><b>Time taken:</td>
-                   <td ><input type="text" name="time"></td>
+                   <td ><input type="date" name="time" placeholder = "27-AUG-2013"></td>
                            </tr>
            <tr>
                <td align="right"><b>Subject:</td>
@@ -93,7 +93,7 @@
                   <tr>
                <td align="right"><b>Photo </td>
                <td>
-                       <input name="file" type="file" id="file" >
+                       <input name="file" type="file" id="file" multiple="multiple">
                    <td>
            </tr>
                  <tr>

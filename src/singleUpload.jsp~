@@ -148,13 +148,7 @@ OutputStream o = response.getOutputStream();
 o.close();
 	    			instream.close();
 	    			outstream.close();
-
             			stmt.executeUpdate("commit");
-            			
-
-
-
-     
    			} catch (Exception e) {
    				out.println(e.getMessage());
    			}

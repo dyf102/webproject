@@ -64,7 +64,7 @@
            </tr>
            <tr>
                <td align="right"><b>Time taken:</td>
-                   <td ><input type="text" name="time"></td>
+                   <td ><input type="text" name="time" placeholder = "27-AUG-2013"></td>
                            </tr>
            <tr>
                <td align="right"><b>Subject:</td>
