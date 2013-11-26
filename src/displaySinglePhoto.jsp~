@@ -14,7 +14,7 @@
 <%		
 		String username = (String) session.getAttribute("loged_in");
 		String photo_id = (String) request.getParameter("photo_id");
-		ArrayList<String> thumbnailArray = new ArrayList<String>();
+		
 		String TABLE_NAME;
 		//query fields initialization
 		TABLE_NAME = "IMAGES";
@@ -28,15 +28,19 @@
 		Connection m_con = null;
 		Statement stmt = null;
 		ResultSet imgResult = null;
+		ResultSet groupResult = null;
+		
+		ArrayList<String> groupNames = new ArrayList<String>();
 
 		/*SQL STATEMENTS*/
 		String getImgSqlStmt = "SELECT PERMITTED,SUBJECT,PLACE,TIMING,DESCRIPTION FROM IMAGES WHERE PHOTO_ID =" +photo_id ;
+		String getGroupName = "SELECT GROUP_NAME FROM GROUPS WHERE USER_NAME = '"+username+"'";
 		/*SQL STATEMENTS*/
-		out.println(getImgSqlStmt);
-		String ownerNameValue = null;
-		String subjectValue = null;
-		String placeValue = null;
-		String descriptionValue = null;
+		String permission_info ="";
+		String subject_info = "";
+		String place_info = "";
+		String timing_info = "";
+		String desc_info ="";
 
 		try {
 			Class drvClass = Class.forName(m_driverName);
@@ -55,18 +59,62 @@
 					m_password);
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-			imgResult = stmt.executeQuery(getImgSqlStmt);
-			if(imgResult.next()) {
-				String permission_info = String.valueOf(imgResult.getLong(1));
-				String subject_info = imgResult.getString(2);
-				
-				String place_info = imgResult.getString(3);
-				String timing_info = imgResult.getDate(4).toString();
+					
+			groupResult = stmt.executeQuery(getGroupName);
 			
+			while(groupResult.next()){
+				String name = groupResult.getString(1);
+				groupNames.add(name);
+			}
+			
+			imgResult = stmt.executeQuery(getImgSqlStmt);
+			
+			if(imgResult.next()) {
+				long value = imgResult.getLong(1);
+				
+				if(value == 1){
+					permission_info = "public";
+				}else if (value == 2){
+					permission_info = "private";
+				}
+				
+				if(imgResult.getString(2) != null){
+					subject_info = imgResult.getString(2);
+				}
+				if(imgResult.getString(3) != null){
+					place_info = imgResult.getString(3);
+				}
+				if(imgResult.getDate(4) != null){
+					timing_info = imgResult.getDate(4).toString();
+				}
+				if(imgResult.getString(5) != null){
+					desc_info = imgResult.getString(5);
+				}
+				
 		%>
-			<img src="displayblob.jsp?photo_id=<%=photo_id%>&type=hd">				
+			<img src="displayblob.jsp?photo_id=<%=photo_id%>&type=hd">
+			<form action = "photoInfo.jsp">
+				Permission:
+				<select name ="permission_info" selected = "<%=permission_info%>">
+					<option value= "private" > private </option>
+					<option value= "public" > public </option>
+				<%for(int i = 0;i < groupNames.size();i++){%>
+					<option value =<%=groupNames.get(i)%>> <%=groupNames.get(i)%></option>
+				<%}%>
+				</select>
+				Subject: <input type = "text" name = "subject_info" value =<%=subject_info%> ><br>
+				Location: <input type = "text" name = "place_info" value =<%=place_info%> ><br>
+				Time: <input type = "text" name = "timing_info" value =<%=timing_info%> ><br>
+				Description: <input type = "text" name = "desc_info" value =<%=desc_info%> ><br>
+				<input type="submit" value = "Update">
+			</form>
+							
 		<%
 			}
+		
+		
+		
+				
 				
 		} catch (SQLException e) {
 			out.println("SQLException: " + e.getMessage());
@@ -77,7 +125,9 @@
 			stmt.close();
 			m_con.close();	
 		}
- %>
+%>
+</body>
+</html>
 
 			
 		
