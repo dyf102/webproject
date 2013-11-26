@@ -53,6 +53,7 @@
 		rset1 = stmt.executeQuery("select group_id from groups where '" + groupName + "' = group_name");
 		rset1.next();		
 		String groupID = rset1.getString(1);
+		rset1 = stmt.executeQuery("update images set permitted = 2 where permitted = " + groupID);
 		String deleteGroupList = "delete from group_lists where group_id = " + groupID;
 		stmt.executeQuery(deleteGroupList);
 	     	rset1 = stmt.executeQuery(deleteGroup);
