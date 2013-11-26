@@ -55,7 +55,7 @@ out.println(checkName);
               rset1 = stmt.executeQuery(checkName);
 	    if (!rset1.next() || groupName.isEmpty()){
 	    	 flag1=true;
-out.println("111");
+
 	     }
 	   else	{
 		rset1 = stmt.executeQuery(checkName1);
@@ -67,6 +67,7 @@ out.println("111");
 			if (rset1.next())
 				id = rset1.getString(1);
 			String addFriend = "insert into group_lists values(" + id + " , '" + friendName + "' , sysdate, '" + notice + "')";
+out.println(addFriend);
 			rset1 = stmt.executeQuery(addFriend);
 		}
 			
