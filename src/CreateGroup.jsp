@@ -150,8 +150,7 @@
     <%	for (int i=0; i<user_name.size(); i++)
 	{	%>
 		
-		<option value= "<%=user_name.get(i)%>>" <%=user_name.get(i)%></option>
-		
+		<option value= "<%=user_name.get(i)%>>"> <%=user_name.get(i)%></option>	
 	<%
 	}
 

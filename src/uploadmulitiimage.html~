@@ -1,17 +1,39 @@
+<!DOCTYPE html>
 <html>
-<head><title>Uplaod Multi-Images -Photos Keeper</title></head>
-<body>
-<center>
-<applet code="wjhk.JUploadApplet" name="JUpload" archive="File%20Upload%20Applet_files/wjhk.jar" mayscript="" height="300" width="640" action = "parseRequest.jsp">
-    <param name="CODE" value="wjhk.jupload2.JUploadApplet">
-    <param name="ARCHIVE" value="wjhk.jupload.jar">
-    <param name="type" value="application/x-java-applet;version=1.4">
-    <param name="scriptable" value="false">    
-    <param name="postURL" value="http://um11.cs.ualberta.ca:16260/webproject/src/parseRequest.jsp?URLParam=URL+Parameter+Value">
-    <param name="nbFilesPerRequest" value="2">    
-Java 1.4 or higher plugin required.
-</applet>
+<head>
 
-</center>
+<script>
+    function supportMultiple() {
+        //do I support input type=file/multiple
+        var el = document.createElement("input");
+
+        return ("multiple" in el);
+    }
+
+    function init() {
+        if(supportMultiple()) {
+            document.querySelector("#multipleFileLabel").setAttribute("style","");
+        }
+    }
+</script>
+<%
+	String username = (String)session.getAttribute("loged_in");
+	if(username == null){
+%>
+	<meta http-equiv="refresh" content="0; url = login.html">
+<%
+}
+</head>
+
+<body onload="init()">
+    <form action="singleUpload.jsp" method="post" enctype="multipart/form-data">
+    <span id="multipleFileLabel" style="display:none">Multiple </span>
+    File: <input type="file" name="files" multiple="multiple"><br>
+	Place taken: <input type="text" name = "place"><br>
+	Taken time:<input type="text" name = "time"><br>
+	Subject:<input type="text" name = "subject"><br>
+	Description:<input type="text" name = "description"><br>
+    <tr><input type="submit"></tr>
+    </form>
 </body>
 </html>

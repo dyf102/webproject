@@ -68,7 +68,7 @@
                            </tr>
            <tr>
                <td align="right"><b>Subject:</td>
-                   <td ><input type="text" nahttp://www.worldofwebcraft.com/blog.php?id=1me="subject"></td>
+                   <td ><input type="text" name="subject"></td>
            </tr>
 	   <tr>
                <td align="right"><b>Description:</td>
@@ -93,7 +93,7 @@
                   <tr>
                <td align="right"><b>Photo </td>
                <td>
-                       <input name="file" type="file" id="file">
+                       <input name="file" type="file" id="file" multiple="multiple">
                    <td>
            </tr>
                  <tr>

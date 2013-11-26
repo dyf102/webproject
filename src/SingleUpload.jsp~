@@ -6,6 +6,9 @@
 <body>
 <%
 		String username = (String)session.getAttribute("loged_in");
+		if(username == null){%>
+			<meta http-equiv="refresh" content="0; url = login.html">
+		<%}
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";		
 		ArrayList<String> group_id = new ArrayList<String>();
 		ArrayList<String> group_name = new ArrayList<String>();
@@ -65,7 +68,7 @@
                            </tr>
            <tr>
                <td align="right"><b>Subject:</td>
-                   <td ><input type="text" nahttp://www.worldofwebcraft.com/blog.php?id=1me="subject"></td>
+                   <td ><input type="text" name="subject"></td>
            </tr>
 	   <tr>
                <td align="right"><b>Description:</td>
@@ -90,7 +93,7 @@
                   <tr>
                <td align="right"><b>Photo </td>
                <td>
-                       <input name="file" type="file" id="file">
+                       <input name="file" type="file" id="file" >
                    <td>
            </tr>
                  <tr>

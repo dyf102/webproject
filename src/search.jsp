@@ -1,23 +1,24 @@
-<%@ page import="java.util.*" %> 
-<%@ page import="java.sql.*" %> 
-<%@ page import="java.lang.System" %> 
 <http>
 <head><title>Search </title><%String username = (String)session.getAttribute("loged_in");%></head>
 <body>
 <center>
-<h3>Images Search</h3>
-<h3>Search for images</h3>
+<h3>Images Search Engine</h3>
 <form method="post" action="search_process.jsp">
 <INPUT TYPE="HIDDEN" NAME="username" value=<%= username %>>
-<table align="center" width="0%" height="25%">
+<table align="center" width="50%" height="25%">
 <tbody>
 <tr>
 <th>Keywords (separate by comma):</th>
-<td><input name="KEYWORDS" maxlength="50" type="text" value=<%=(String)request.getParameter("key")%>></td>
+<%
+String key = (String)request.getParameter("key");
+if (key == null)
+key = "";
+%>
+<td><input name="KEYWORDS" maxlength="80" type="text" value=<%=key%>></td>
 </tr>
 <tr>
-<th>Time Periods (06-NOV-2012, 09-NOV-2012, ...):</th>
-<td><input name="TIMEPER" maxlength="50" type="text"></td>
+<th>Time Periods:</th>
+<td><input name="TIMEPER" maxlength="80" type="text" width = "400" placeholder="01-JAN-2013 to 31-JAN-2013"></td>
 </tr>
 <tr>
 <th>Order by:   </th>
