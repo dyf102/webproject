@@ -12,8 +12,8 @@
 <%
 }
 		String groupName = request.getParameter("DeleteName");
-		String checkName = "select * from groups where '" + groupName + "' = group_name and user_name = '" + username + "'";
-		String deleteGroup = "delete from groups where '" + groupName + "' = group_name";
+		String checkName = "select * from GROUPS where '" + groupName + "' = group_name and user_name = '" + username + "'";
+		String deleteGroup = "delete from GROUPS where '" + groupName + "' = group_name";
 		
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
@@ -50,7 +50,7 @@
 		 
 	     }
 	   else	{
-		rset1 = stmt.executeQuery("select group_id from group where '" + groupName + "' = group_name");
+		rset1 = stmt.executeQuery("select group_id from groups where '" + groupName + "' = group_name");
 		rset1.next();		
 		String groupID = rset1.getString(1);
 		String deleteGroupList = "delete from group_lists where group_id = " + groupID;

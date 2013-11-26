@@ -5,6 +5,7 @@
 <HTML>
 <HEAD>
 <TITLE>Create Group</TITLE>
+<meta http-equiv=”refresh” content=”30" >
 </HEAD>
 
 <BODY>
