@@ -14,6 +14,7 @@
 <%		
 		String username = (String) session.getAttribute("loged_in");
 		String photo_id = (String) request.getParameter("photo_id");
+		session.setAttribute("photo_id",photo_id);
 		
 		String TABLE_NAME;
 		//query fields initialization
@@ -93,13 +94,14 @@
 				
 		%>
 			<img src="displayblob.jsp?photo_id=<%=photo_id%>&type=hd">
-			<form action = "photoInfo.jsp">
+			<p><b>Current Permission:<%=permission_info%></b></p>
+			<form action = "photoInfo.jsp?photo_id=<%=photo_id%>">
 				Permission:
-				<select name ="permission_info" selected = "<%=permission_info%>">
-					<option value= "private" > private </option>
-					<option value= "public" > public </option>
+				<select name ="permission_info" >
+					<option name = "private" value= "private" > private </option>
+					<option name = "private" value= "public" > public </option>
 				<%for(int i = 0;i < groupNames.size();i++){%>
-					<option value =<%=groupNames.get(i)%>> <%=groupNames.get(i)%></option>
+					<option value ="<%=groupNames.get(i)%>"> <%=groupNames.get(i)%></option>
 				<%}%>
 				</select>
 				Subject: <input type = "text" name = "subject_info" value =<%=subject_info%> ><br>

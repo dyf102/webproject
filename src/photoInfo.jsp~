@@ -14,9 +14,10 @@
 <%		
 		
 		String username = (String) session.getAttribute("loged_in");
-		String photo_id = (String) request.getParameter("photo_id");
+		String photo_id = (String) session.getAttribute("photo_id");
 		
-		String subject_info, place_info,timing_info,permission_info;
+		String subject_info, place_info,timing_info,permission_info,desc_info;
+		
 		permission_info = request.getParameter("permission_info");
 		subject_info = request.getParameter("subject_info");
 		place_info = request.getParameter("place_info");
@@ -35,18 +36,20 @@
 
 		Connection m_con = null;
 		Statement stmt = null;
-		ResultSet imgResult = null;
+		ResultSet groupIdResult = null;
 
 		/*SQL STATEMENTS*/
 		
-		String getGroupID = "";
-		String updateInfo = "";
-		"UPDATE USERS SET PERMITTED = ?,SUBJECT = ?, PLACE = ?, TIMING = ?,DESCRIPTION = ? WHERE PHOTO_ID ="+photo_id;
+		String getGroupID = "SELECT GROUP_ID FROM GROUPS WHERE GROUP_NAME = '"+permission_info+"'";
+		String updateInfo = "UPDATE IMAGES SET PERMITTED = ?,SUBJECT = ?, PLACE = ?, TIMING = ?,DESCRIPTION = ? WHERE PHOTO_ID ="+photo_id;
+		
+		
 		/*SQL STATEMENTS*/
 		String ownerNameValue = null;
 		String subjectValue = null;
 		String placeValue = null;
 		String descriptionValue = null;
+		int group_id ;
 
 		try {
 			Class drvClass = Class.forName(m_driverName);
@@ -62,19 +65,51 @@
 		try {
 		    
 			m_con = DriverManager.getConnection(m_url, m_userName,m_password);
-			PreparedStatement pstmt = m_con.prepareStatement(updateInfo);
-			if(){
-					
-			}
-			if(){
+			
+			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+			
+			groupIdResult = stmt.executeQuery(getGroupID);
+			
+			if(groupIdResult.next()){
+				group_id = (int)groupIdResult.getLong(1);
 				
+				PreparedStatement pstmt = m_con.prepareStatement(updateInfo);
+				pstmt.setInt(1,(int)group_id);
+				pstmt.setString(2,subject_info);
+				
+				pstmt.setString(3,place_info);
+				pstmt.setString(4,timing_info);
+				pstmt.setString(5,desc_info);
+				
+				if(pstmt.executeUpdate()==0){
+					out.println("Cannot Update");
+					%>
+					<meta http-equiv="refresh" content="1; url = displayAll.jsp">
+					<%
+				}else{
+					out.println("Update Successfully");
+					%>
+					<meta http-equiv="refresh" content="1; url = displayAll.jsp">
+					<%
+				}
 			}
-			pstmt.setInt(1,permission_info);
-			pstmt.setString(2,subject_info);
-			pstmt.setString(3,)
 			
 			
-		%>
+		}catch (SQLException e){
+				out.println("SQLException: " + e.getMessage());
+		}finally{
+			
+				if(groupIdResult != null){
+					groupIdResult.close();
+				}
+				
+				stmt.close();
+				m_con.close();	
+			
+			
+		}
+%>
 		
 		
 		
