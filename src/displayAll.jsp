@@ -219,7 +219,7 @@
 				if (imgResult != null) {
 					imgResult.close();
 				}
-				stmt.close();
+				//stmt.close();
 				m_con.close();
 			}
 		%>
