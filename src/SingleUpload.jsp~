@@ -14,6 +14,7 @@
 		<%}
 	%>
 <p>Hi <% = username%> </p>
+<%
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";		
 		ArrayList<String> group_id = new ArrayList<String>();
 		ArrayList<String> group_name = new ArrayList<String>();
