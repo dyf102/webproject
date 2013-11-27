@@ -14,7 +14,6 @@
 		String groupName = request.getParameter("DeleteName");
 		String checkName = "select * from GROUPS where '" + groupName + "' = group_name and user_name = '" + username + "'";
 		String deleteGroup = "delete from GROUPS where '" + groupName + "' = group_name";
-		
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
