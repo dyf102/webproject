@@ -36,6 +36,7 @@
 	String password = "C1234567";
 	String drivername = "oracle.jdbc.driver.OracleDriver";
 	String dbstring ="jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+	Boolean defult = false;
 
  %>
 
@@ -70,7 +71,11 @@
                            	}
                           	if(name1.equals("time"))
                           	{  
+					if(value == null||value.equals("")){
+						value ="sysdate";
+					}
 					time = value;
+					defult = true;
                                 }
                           	if(name1.equals("subject"))
                           	{  
@@ -114,11 +119,16 @@
 					if (rset.next())
 						permit = rset.getString(1);
 				}
-				out.println("insert into images values (" + id + ", '" + username + "' , " + permit + 
-						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
+				out.println("insert into images values (" + id + ", '" + username + "' , " + permit + ", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
+				if(defult == true){
+				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
+						", '" + subject + "' , '" + place + "' , " + time + ", '" + description + "', empty_blob(), empty_blob())");
+				
+				}
+				else{
 				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
 						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
-
+}
 				String cmd = "SELECT * FROM images WHERE photo_id = " + id + " FOR UPDATE";
 				rset = stmt.executeQuery(cmd);
 	    			rset.next();
@@ -136,6 +146,9 @@
 	    			while ((length = instream.read(buffer)) != -1)
 					outstream.write(buffer, 0, length);
 	    			*/
+	    			String insertcounter = "INSERT INTO POPULARITY VALUES("+id+","+"0)";
+				Statement tmp = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+				tmp.executeQuery(insertcounter);
 
 rset = stmt.executeQuery("select THUMBNAIL from images where photo_id = " + id);
 rset.next();

@@ -384,8 +384,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 
 		Connection m_con = null;
 		
-            	String sql = "SELECT i.PHOTO_ID FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC)num,IMAGES i,POPULARITY p WHERE ROWNUM <=5 AND i.PHOTO_ID = p.PHOTO_ID AND p.COUNT_NUM = num.COUNT_NUM order by p.COUNT_NUM DESC";
-            	String sql2 = "SELECT i.SUBJECT FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC)num,IMAGES i,POPULARITY p WHERE ROWNUM <=5 AND i.PHOTO_ID = p.PHOTO_ID AND p.COUNT_NUM = num.COUNT_NUM order by p.COUNT_NUM DESC";
+            	String sql = "SELECT * FROM (SELECT i.PHOTO_ID FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC)num,IMAGES i,POPULARITY p WHERE i.PHOTO_ID = p.PHOTO_ID AND p.COUNT_NUM = num.COUNT_NUM order by p.COUNT_NUM DESC) WHERE ROWNUM <=5";
+            	String sql2 = "SELECT * FROM (SELECT i.SUBJECT FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC)num,IMAGES i,POPULARITY p WHERE i.PHOTO_ID = p.PHOTO_ID AND p.COUNT_NUM = num.COUNT_NUM order by p.COUNT_NUM DESC) WHERE ROWNUM <=5";
             	try {
 			Class drvClass = Class.forName(m_driverName);
 			DriverManager.registerDriver((Driver) drvClass.newInstance());
