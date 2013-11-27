@@ -146,7 +146,7 @@
 	    			while ((length = instream.read(buffer)) != -1)
 					outstream.write(buffer, 0, length);
 	    			*/
-	    			String insertcounter = "INSERT INTO POPULARITY VALUES("+id+","+"0)";
+	    			String insertcounter = "INSERT INTO POPULARITY VALUES("+id+",0)";
 				Statement tmp = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 				tmp.executeQuery(insertcounter);
 

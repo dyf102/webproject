@@ -248,7 +248,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                </ul>
             </li>
             <li class="last ">
-               <a href="data_Viewer.jsp">
+               <a href="dataViewer.jsp">
                <i class="icon-bar-chart"></i> 
                <span class="title">Statistic Data</span>
                </a>
@@ -333,7 +333,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <div class="col-md-12">
                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                <h3 class="page-title">
-                  Chenge user information <small>Please type your new personal information</small>
+                  Change user information <small>Please type your new personal information</small>
                </h3>
                <ul class="page-breadcrumb breadcrumb">
                   <li class="btn-group">

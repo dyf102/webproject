@@ -10,6 +10,7 @@ DROP TABLE group_lists;
 DROP TABLE groups;
 DROP TABLE persons;
 DROP TABLE users;
+DROP TABLE POPUlARITY;
  
  
 CREATE TABLE users (
@@ -18,7 +19,6 @@ CREATE TABLE users (
    date_registered date,
    primary key(user_name)
 )
-TABLESPACE C391WARE;
  
 INSERT INTO users values('admin','admin9999',sysdate);
  
@@ -34,7 +34,6 @@ CREATE TABLE persons (
    UNIQUE (email),
    FOREIGN KEY (user_name) REFERENCES users
 )
-TABLESPACE C391WARE;
  
 INSERT INTO persons values('admin','admin','admin',null,null,null);
  
@@ -48,7 +47,6 @@ CREATE TABLE groups (
    UNIQUE (user_name, group_name),
    FOREIGN KEY(user_name) REFERENCES users
 )
-TABLESPACE C391WARE;
  
 INSERT INTO groups values(1,null,'public', sysdate);
 INSERT INTO groups values(2,null,'private',sysdate);
@@ -63,7 +61,6 @@ CREATE TABLE group_lists (
    FOREIGN KEY(group_id) REFERENCES groups,
    FOREIGN KEY(friend_id) REFERENCES users
 )
-TABLESPACE C391WARE;
  
 CREATE TABLE images (
    photo_id    int,
@@ -79,20 +76,9 @@ CREATE TABLE images (
    FOREIGN KEY(owner_name) REFERENCES users,
    FOREIGN KEY(permitted) REFERENCES groups
 )
-TABLESPACE C391WARE;
- 
---Added tables
- 
---Keeps track of which users have seen which images for popularity count
-CREATE TABLE image_views (
-    photo_id    int,
-    user_name   varchar(24),
-    PRIMARY KEY(photo_id, user_name),
-    FOREIGN KEY(photo_id) REFERENCES images,
-    FOREIGN KEY(user_name) REFERENCES users
-)
-TABLESPACE C391WARE;
+CREATE TABLE POPULARITY(PHOTO_ID int,COUNT_NUM int)
+
 CREATE INDEX subject_index ON images(subject) INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS('sync (on commit)');
 CREATE INDEX place_index ON images(place) INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS('sync (on commit)');
-CREATE INDEX description_index ON images(description) INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS('sync (on commit) storage index_storage');
+CREATE INDEX description_index ON images(description) INDEXTYPE IS CTXSYS.CONTEXT PARAMETERS('sync (on commit)');
 
