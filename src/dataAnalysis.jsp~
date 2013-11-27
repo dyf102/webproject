@@ -33,6 +33,15 @@
 		Statement stmt =null ;
 		ResultSet rs = null;
 
+
+
+		try{
+			if(from.length() == 0){
+				from = "0/01/1970"
+			}
+		
+		}
+		
 		/*SQL STATEMENTS*/
 		
 		
@@ -75,7 +84,14 @@
 		String view19 = ("select owner_name,subject,new_date,count(*) from helper group by owner_name,subject,new_date";
 		
 		/*SQL STATEMENTS*/
-
+		
+		
+		
+		
+		
+		
+		
+		
 		try {
 			Class drvClass = Class.forName(m_driverName);
 			DriverManager.registerDriver((Driver) drvClass.newInstance());
@@ -92,7 +108,7 @@
 			
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-		if()
+		
 			
 			
 			
