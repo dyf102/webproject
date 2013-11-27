@@ -61,6 +61,9 @@
            		{     
 				String name1 = item.getFieldName();
                   		String value = item.getString();
+                  		if(value == null){
+                  			value = "";
+                  		}
                   		if(name1.equals("place"))
                    		{
 					place = value;
@@ -111,6 +114,8 @@
 					if (rset.next())
 						permit = rset.getString(1);
 				}
+				out.println("insert into images values (" + id + ", '" + username + "' , " + permit + 
+						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
 				stmt.execute("insert into images values (" + id + ", '" + username + "' , " + permit + 
 						", '" + subject + "' , '" + place + "' , '" + time + "', '" + description + "', empty_blob(), empty_blob())");
 
@@ -154,10 +159,13 @@ o.close();
    			}
   			 }
   		 }
+		
   		 conn.close();
    }
 %>
+
 </table>
+<meta http-equiv="refresh" content="3; url = CreateGroup.jsp">
 <%!
 public static Connection getConnected( String drivername,
 					    String dbstring,

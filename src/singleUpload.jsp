@@ -159,10 +159,13 @@ o.close();
    			}
   			 }
   		 }
+		
   		 conn.close();
    }
 %>
+
 </table>
+<meta http-equiv="refresh" content="3; url = CreateGroup.jsp">
 <%!
 public static Connection getConnected( String drivername,
 					    String dbstring,
