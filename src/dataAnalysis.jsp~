@@ -79,7 +79,7 @@
 		
 		String P4 = "SELECT COUNT(*), OWNER_NAME FROM IMAGES WHERE SUBJECT = '"+subject+"' AND TIMING <= '"+to_format+"' AND TIMING >= '"+from_format+"' GROUP BY OWNER_NAME";
 		
-		String P5 = "SELECT COUNT(*), OWNER_NAME,SUBJECT FROM IMAGES WHERE FROM IMAGES WHERE TIMING <= '"+to_format+"' AND TIMING >='"+from_format+"' GROUP BY OWNER_NAME, SUBJECT";
+		String P5 = "SELECT COUNT(*), OWNER_NAME,SUBJECT FROM IMAGES WHERE TIMING <= '"+to_format+"' AND TIMING >='"+from_format+"' GROUP BY OWNER_NAME, SUBJECT";
 		
 		String V6 = "create view helper as select owner_name,subject,substr(timing,8) as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+ "'"+from_format+"'";
 		
@@ -91,23 +91,23 @@
 		String V10 = "create view helper as select subject,substr(timing,8) as new_date from images where owner_name="+"'"+username+"'"+ "and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
 		String P11 = "select subject,new_date,count(*) from helper group by subject,new_date";
 		
-		String V12 = "create view helper as select substr(timing,8) as new_date from images where subject="+"'"+subject+"'"+"and owner_name="+"'"+username+"'"+"and timing <="+"'"+to_format+"'"+ "and timing >="+ "'"+from_format+"'";
+		String V12 = "create view helper as select substr(timing,8) as new_date from images where subject="+"'"+subject+"'"+"and owner_name="+"'"+username+"'"+"and timing <="+"'"+to_format+"'"+ " AND timing >="+ "'"+from_format+"'";
 		
 		String P13 = "select new_date,count(*) from helper group by new_date";
 		
-		String V14 = "create view helper as select owner_name,subject,to_char(timing,'WW-yyyy') as new_date from images where owner_name="+"'"+username+"'"+"and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V14 = "create view helper as select owner_name,subject,to_char(timing,'mm-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ " AND timing >="+"'"+from_format+"'";
 		
 		String P15 = "select owner_name,subject,new_date,count(*) from helper group by owner_name,subject,new_date";
 		
-		String V16 = "create view helper as select owner_name,to_char(timing,'WW-yyyy') as new_date from images where subject="+"'"+subject+"'"+"and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V16 = "create view helper as select owner_name,to_char(timing,'mm-yyyy') as new_date from images where subject="+"'"+subject+"'"+"and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
 		
 		String P17 = "select owner_name,new_date,count(*) from helper group by owner_name,new_date";
 		
-		String V18 = "create view helper as select owner_name,subject,to_char(timing,'WW-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V18 = "create view helper as select owner_name,subject,to_char(timing,'mm-yyyy') as new_date from images where owner_name = '"+username+"' and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
 		
-		String P19 = "select owner_name,subject,new_date,count(*) from helper group by subject,new_date";
+		String P19 = "select subject,new_date,count(*) from helper group by subject,new_date";
 		
-		String V20 = "create view helper as select to_char(timing,'WW-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V20 = "create view helper as select to_char(timing,'mm-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
 		
 		String P21 = "select new_date,count(*) from helper group by new_date";
 		
@@ -299,7 +299,7 @@
 					}
 					stmt1.execute(clear);
 				
-			}else if(!subject.equals("all")&& username.equals("all") && frequency.equals("month")){
+			}else if(subject.equals("all")&& username.equals("all") && frequency.equals("month")){
 					stmt1.executeQuery(V14);
 					rs2 = stmt2.executeQuery(P15);
 					// inital_table_user
@@ -310,8 +310,8 @@
 					<%
 					// inital_table_user
 			          while(rs2.next()){
-							String string = rs2.getString(3);
-							String[] parts = string.split("-");     
+					String string = rs2.getString(3);
+					String[] parts = string.split("-");     
 			              String month = parts[0]; 
 			              String year = parts[1];         
 			              calendar.clear();
@@ -356,13 +356,51 @@
 		              	calendar.set(nian, yue, ri);
 		              	end_time= sdf.format(calendar.getTime());  
 				          time=start_time+"~"+end_time;
+				          
 				           out.println("<TR>");
 				           out.println("<TD>"+subject+"</TD><TD>"+rs2.getString(1)+"</TD><TD>"+time+"</TD><TD>"+rs2.getString(3)+"</TD>");
 				           out.println("</TR>");
 				      }
 				          stmt1.execute(clear);
-	
 			}else if(subject.equals("all")&& !username.equals("all") && frequency.equals("month")){
+					stmt1.executeQuery(V18);
+					rs2 = stmt2.executeQuery(P19);
+					// inital_table_user
+					%>
+					<table border="1">
+					<thead><tr><th>User</th><th>Subject</th><th>Time</th><th>Picture Upload</th></tr></thead>
+					<tbody>
+					<%
+					// inital_table_user
+					 int print_flag=0;
+          			while(rs2.next()){ 
+           				String string = rs2.getString(2);
+					String[] parts = string.split("-");     
+				              String month = parts[0]; 
+				              String year = parts[1];         
+				              calendar.clear();
+				              int ri=1;
+				              int yue=Integer.parseInt(month)-1;
+				              int nian=Integer.parseInt(year);
+				              calendar.set(nian, yue, ri);
+				              int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+				              start_time = sdf.format(calendar.getTime());
+				              ri=maxDay;
+				              calendar.set(nian, yue, ri);
+				              end_time= sdf.format(calendar.getTime());  
+						time=start_time+"~"+end_time;
+           				out.println("<TR>");
+           			if(print_flag==0){
+           				out.println("<TD>"+username+"</TD><TD>"+rs2.getString(1)+"</TD><TD>"+time+"</TD><TD>"+rs2.getString(3)+"</TD>");
+          			 }else{
+           				out.println("<TD>"+"    "+"</TD><TD>"+rs2.getString(1)+"</TD><TD>"+time+"</TD><TD>"+rs2.getString(3)+"</TD>");
+               
+           			}
+           				out.println("</TR>");
+          			}
+          				stmt.execute(clear);
+  
+			}else if(!subject.equals("all")&& !username.equals("all") && frequency.equals("month")){
 					stmt1.executeQuery(V20);
 					rs2 = stmt2.executeQuery(P21);
 					// inital_table_user
@@ -373,7 +411,7 @@
 					<%
 					// inital_table_user
 					 int print_flag=0;
-						while(rs2.next()){ 
+					while(rs2.next()){ 
 					           String string = rs2.getString(1);
 								String[] parts = string.split("-");     
 				              String month = parts[0]; 
@@ -683,7 +721,7 @@
 			</tbody>
 			</table>
 			<%
-			 out.println("<h4>"+username+"<h4>");
+			
 	        m_con.close();
 
 			
