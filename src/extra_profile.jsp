@@ -248,7 +248,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                </ul>
             </li>
             <li class="last ">
-               <a href="data_Viewer.jsp">
+               <a href="dataViewer.jsp">
                <i class="icon-bar-chart"></i> 
                <span class="title">Statistic Data</span>
                </a>

@@ -350,7 +350,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                   </li>
                   <li>
                      <i class="icon-home"></i>
-                     <a href="index.html">Home</a> 
+                     <a href="main.jsp">Home</a> 
                      <i class="icon-angle-right"></i>
                   </li>
                   <li><a href="#">Change Information</a></li>
