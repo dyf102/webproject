@@ -357,11 +357,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                      <a href="index.html">Home</a> 
                      <i class="icon-angle-right"></i>
                   </li>
-                  <li>
-                     <a href="#">Layouts</a>
-                     <i class="icon-angle-right"></i>
-                  </li>
-                  <li><a href="#">Blank Page</a></li>
+                  <li><a href="#">Top Five Images</a></li>
                </ul>
                <!-- END PAGE TITLE & BREADCRUMB-->
             </div>

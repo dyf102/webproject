@@ -77,7 +77,7 @@
 					ResultSet.CONCUR_UPDATABLE);
 					
 					
-			String owner_name = "";
+			owner_name = "";
 			Statement stmt4 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 			ResultSet re = stmt4.executeQuery(getOwner);
