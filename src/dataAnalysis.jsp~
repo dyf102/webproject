@@ -18,10 +18,10 @@
 <p><b>Data Analysis Center</b></p>
 <%
 		String username_session = (String) session.getAttribute("loged_in");
-		if(username == null){%>
+		if(username_session == null){%>
 			<meta http-equiv="refresh" content="0; url = login.html">
 		<%}
-		if(username.equals("admin")){%>
+		if(!username_session.equals("admin")){%>
 			<meta http-equiv="refresh" content="0; url = main.jsp">
 		<%}
 	
@@ -80,7 +80,7 @@
 		String V1 = "CREATE VIEW HELPER AS SELECT OWNER_NAME,SUBJECT FROM IMAGES WHERE OWNER_NAME='"+username
 		+"' AND SUBJECT= '"+subject+"' AND TIMING <='"+to_format+"' AND TIMING >= '"+from_format+"'";
 		
-		String R2 = "SELECT OWNER_NAME,SUBJECT,COUNT(*) FROM HELPER GROUP BY OWNER_NAME,SUBJECT";
+		String P2 = "SELECT OWNER_NAME,SUBJECT,COUNT(*) FROM HELPER GROUP BY OWNER_NAME,SUBJECT";
 		
 		String P3 = "SELECT COUNT(*), SUBJECT FROM IMAGES WHERE OWNER_NAME = '"+username+"' AND TIMING <= '"+to_format+"' AND TIMING>= '"+from_format+"' GROUP BY SUBJECT";
 		
@@ -114,19 +114,19 @@
 		
 		String P19 = "select subject,new_date,count(*) from helper group by subject,new_date";
 		
-		String V20 = "create view helper as select to_char(timing,'mm-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V20 = "create view helper as select to_char(timing,'mm-yyyy') as new_date from images where owner_name ='"+username+"' and subject = '"+subject+"' and timing <="+"'"+to_format+"'"+ " and timing >="+"'"+from_format+"'";
 		
 		String P21 = "select new_date,count(*) from helper group by new_date";
 		
-		String V22 = "create view helper as select to_char(timing,'WW-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V22 = "create view helper as select to_char(timing,'WW-yyyy') as new_date from images where owner_name ='"+username+"' and subject = '"+subject+"' and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
 		
 		String P23 = "select new_date,count(*) from helper group by new_date";
 		
-		String V24 = "create view helper as select subject,to_char(timing,'WW-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V24 = "create view helper as select subject,to_char(timing,'WW-yyyy') as new_date from images where  owner_name ='"+username+"' and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
 		
 		String P25 = "select subject,new_date,count(*) from helper group by subject,new_date";
 		
-		String V26 = "create view helper as select owner_name,to_char(timing,'WW-yyyy') as new_date from images where timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
+		String V26 = "create view helper as select owner_name,to_char(timing,'WW-yyyy') as new_date from images where subject = '"+subject+"' and timing <="+"'"+to_format+"'"+ "and timing >="+"'"+from_format+"'";
 		
 		String P27 = "select owner_name,new_date,count(*) from helper group by owner_name,new_date";
 		
@@ -157,7 +157,7 @@
 			 /************************START************************/
 			if(!username.equals("all") && !subject.equals("all") && frequency.equals("none")){
 				stmt1.executeQuery(V1);
-				rs2 = stmt2.executeQuery(R2);
+				rs2 = stmt2.executeQuery(P2);
 				// inital_table_user
 				%>
 				<table border="1">
@@ -166,7 +166,7 @@
 				<%
 				// inital_table_user
 			while(rs2.next()){
-				out.println("<TR><TD>"+username+"</TD><TD>"+rs2.getString(2)+"</TD><TD>"+time+"</TD><TD>"+rs2.getString(1)+"</TD></TR>");
+				out.println("<TR><TD>"+username+"</TD><TD>"+rs2.getString(2)+"</TD><TD>"+time+"</TD><TD>"+rs2.getString(3)+"</TD></TR>");
 			}
 				stmt1.executeQuery(clear);
 			
