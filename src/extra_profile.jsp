@@ -248,7 +248,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                </ul>
             </li>
             <li class="last ">
-               <a href="data_analysis.jsp">
+               <a href="data_Viewer.jsp">
                <i class="icon-bar-chart"></i> 
                <span class="title">Statistic Data</span>
                </a>
@@ -350,7 +350,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                   </li>
                   <li>
                      <i class="icon-home"></i>
-                     <a href="index.html">Home</a> 
+                     <a href="main.jsp">Home</a> 
                      <i class="icon-angle-right"></i>
                   </li>
                   <li><a href="#">Change Information</a></li>
