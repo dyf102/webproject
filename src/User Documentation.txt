@@ -1,0 +1,53 @@
+User Guideline
+
+Chapter 1: Installation
+
+To install our system, please first open a terminal and type make install;
+
+To run our system, please open your brower and input umxx.cs.ualberta.ca:(port number)/webproject
+
+Chapter 2: Module Guideline
+
+Section 1: User Management Module
+	You are allowed to login from the login page by typing in correct username and password.
+	If you are new for our system please create an account by clicking "create an account"
+	when you are creating account please input your full name, email, address, phone number, username and password.
+
+Section 2: Security module
+	After you logged into our system, there is a guide bar on the left side. by typing "Friend" section you will find a Groups button
+	Click "Groups" button to enter the group management page.
+	There are 4 main functions in group management page
+	1. Create Group
+		User can create a group by typing a unique group name.
+	2. Delete Group
+		User can delete a group by selecting the one that user wants to delete.
+		When a group is deleted, all images that accociate with this group will set to be private.
+	3. Add Group Member
+		User can add a friend into one of user's group by selecting the group name and a friend that has not been added.
+	4. Delete Group Member
+		User can delete a friend of group by selecting a group name and a friend name that is in the group.
+
+	Each image stored in the system has a unique owner; and the image, as well as its descriptive information, can only be updated and/or 		removed by its owner.
+	Each image can be viewed by:
+
+   	 public, i.e., by any user
+   	 a designated group, i.e., all users in the group, or
+   	 private, i.e., by the owner only
+
+Section 3: Uploading Module
+	User can use upload section to upload single or multiple photos.
+	In uploading page, user can chose either to enter all information of the photos or part of it and then select the photo that wants to upload and click submit to finish uploading.
+
+Section 4: Display Module
+	After login, the Main page will show the most top five popular images. 
+	In Images section, user can view his own Album and modifty all information of his own images. At the same time, user can also view all public images under public album section. Moreover, if user is under some other users' group list, the user will be able to view all images in those groups.
+
+Section 5: Search Module
+	User can use Search function to search an image.
+ 	User can choose either using keywords search or using both keyword and time periods to search.
+	There are three options to arrange the result
+		1. most-recent-first
+		2. most-recent-last
+		3. relevance
+
+
