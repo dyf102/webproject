@@ -45,7 +45,7 @@
 		String getGroupID = "SELECT GROUP_ID FROM GROUPS WHERE GROUP_NAME = '"+permission_info+"'AND USER_NAME ='"+username+"' AND USER_NAME IS NOT NULL";
 		String updateInfo = "UPDATE IMAGES SET PERMITTED = ?,SUBJECT = ?, PLACE = ?, TIMING = ?,DESCRIPTION = ? WHERE PHOTO_ID ="+photo_id;
 		String deletePhoto = "DELETE FROM IMAGES WHERE PHOTO_ID ="+ photo_id;
-		
+		String deleteCounter = "DELETE FROM POPULARITY WHERE PHOTO_ID="+photo_id;
 		
 		/*SQL STATEMENTS*/
 		String ownerNameValue = null;
@@ -73,11 +73,12 @@
 					ResultSet.CONCUR_UPDATABLE);
 			stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
+			stmt3 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
 				
 			if(submit_info.equals("Delete")){
-				out.println(deletePhoto);
 				deleteResult = stmt2.executeQuery(deletePhoto);
-				
+				stmt3.executeQuery(deleteCounter);
 				out.println("Delete Successfully");
 				%>
 				<meta http-equiv="refresh" content="1; url = displayAll.jsp">

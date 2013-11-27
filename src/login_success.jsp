@@ -1,4 +1,5 @@
 <%@page contentType="text/html"%>
+<%@page import="javax.servlet.http.Cookie"%>
 <html>
 <head><title>Login successful-Photos Keeper</title></head>
 <meta http-equiv="refresh" content="3; url = layout_blank_page.jsp">

@@ -29,13 +29,17 @@
 		Connection m_con = null;
 		Statement stmt = null;
 		Statement stmt2 = null;
+		Statement stmt3 = null;
 		ResultSet imgResult = null;
 		ResultSet groupResult = null;
 		ResultSet currentGroupResult = null;
 		
+		
 		ArrayList<String> groupNames = new ArrayList<String>();
 
 		/*SQL STATEMENTS*/
+		String getCounter = "SELECT COUNT_NUM FROM POPULARITY WHERE PHOTO_ID ="+photo_id;
+		String getOwner = "SELECT OWNER_NAME FROM IMAGES WHERE PHOTO_ID = "+photo_id;
 		String getImgSqlStmt = "SELECT PERMITTED,SUBJECT,PLACE,TIMING,DESCRIPTION FROM IMAGES WHERE PHOTO_ID =" +photo_id ;
 		String getGroupName = "SELECT GROUP_NAME FROM GROUPS WHERE USER_NAME = '"+username+"'";
 		
@@ -65,7 +69,35 @@
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 			stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);		
+					ResultSet.CONCUR_UPDATABLE);
+			stmt3 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+					
+					
+			String owner_name = "";
+			Statement stmt4 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+			ResultSet re = stmt4.executeQuery(getOwner);
+			if(re.next()){
+				owner_name = re.getString(1);
+			}
+			if (!owner_name.equals( username)){
+				ResultSet result = null;
+				result = stmt3.executeQuery(getCounter);
+				//out.println(getCounter);
+				if(result.next()){
+					String uploadconter = "UPDATE POPULARITY SET COUNT_NUM = COUNT_NUM +1 WHERE PHOTO_ID = "+photo_id;
+					Statement tmp = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+					tmp.executeQuery(uploadconter);
+			
+				}else{
+					String insertcounter = "INSERT INTO POPULARITY VALUES("+photo_id+","+"1)";
+					Statement tmp = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+					tmp.executeQuery(insertcounter);
+				}
+				}		
 			currentGroupResult = stmt2.executeQuery(getCurrentGroup);	
 			groupResult = stmt.executeQuery(getGroupName);
 			

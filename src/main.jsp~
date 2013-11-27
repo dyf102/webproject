@@ -12,7 +12,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN HEAD -->
 <head>
    <meta charset="utf-8" />
-   <title>Metronic | Layouts - Blank Page</title>
+   <title>DashBoard</title>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
    <meta content="" name="description" />
@@ -202,7 +202,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
             <li class="start ">
-               <a href="displayAll.jsp">
+               <a href="main.jsp">
                <i class="icon-home"></i> 
                <span class="title">Main</span>
                </a>
@@ -212,6 +212,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                <a href="help.html" target="_blank">
                <i class="icon-gift"></i> 
                <span class="title">Help</span>
+               </a>
+            </li>
+             <li class="tooltips" data-placement="left" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+               <a href="displayAll.jsp">
+               <i class="icon-home"></i> 
+               <span class="title">Images</span>
                </a>
             </li>
             <li class="">
@@ -364,7 +370,85 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
          <!-- BEGIN PAGE CONTENT-->
          <div class="row">
             <div class="col-md-12">
-               
+            <%@ page import="java.io.*"%>
+	<%@ page import="java.util.*"%>
+	<%@ page import="java.sql.*"%>
+	<%@ page import="oracle.jdbc.*"%>
+	<%@ page import="java.lang.System"%>
+            <%
+            String TABLE_NAME;
+		//query fields initialization
+		TABLE_NAME = "IMAGES";
+
+		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+		String m_driverName = "oracle.jdbc.driver.OracleDriver";
+
+		String m_userName = "c391g3";
+		String m_password = "C1234567";
+
+		Connection m_con = null;
+		Statement stmt = null;
+		ResultSet imgResult = null;
+            
+            
+            
+            %>
+            
+            
+            
+               		<table border="1">
+		<tr>
+			<td><b><%=username%>'s Album</b></td>
+		</tr>
+		<tr>
+			<%
+				/*User's Image ==START==*/
+						imgResult = stmt.executeQuery(getImgSqlStmt);
+						while (imgResult.next()) {
+							String id = String.valueOf(imgResult.getLong(1));
+			%>
+			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"> <img
+					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50"
+					HEIGHT="50"></a></td>
+			<%
+				}
+						/*User's Image ==END==*/
+			%>
+		</tr>
+		<tr>
+			<%
+				/*User's subject ==START==*/
+						imgResult = stmt.executeQuery(getImgSqlStmt);
+						while (imgResult.next()) {
+							String subject = imgResult.getString(2);
+			%>
+			<td><%=subject%></td>
+			<%
+				/*User's subject ==START==*/
+						}
+			%>
+		</tr>
+
+
+
+		<tr>
+			<td><b>Public Album</b></td>
+		</tr>
+		<tr>
+			<%
+				/*PUBLIC IMAGE ==START==*/
+						imgResult = stmt2.executeQuery(getPublicImg);
+						while (imgResult.next()) {
+							String id = String.valueOf(imgResult.getLong(1));
+			%>
+			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"> <img
+					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50"
+					HEIGHT="50"></a></td>
+			<%
+				/*PUBLIC IMAGE ==END==*/
+						}
+			%>
+		</tr>
                
                
                

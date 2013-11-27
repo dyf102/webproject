@@ -147,7 +147,8 @@
 	        else if(dats && (relevance || mrf))
 	        	sql += "ORDER BY timing DESC";	   
 	        else if(dats && mrl)
-	        	sql += "ORDER BY timing";	
+	        	sql += "ORDER BY timing";
+	        //out.println(sql+"dasdasdsadsadassda");	
         	
         	try{
 	        	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, 

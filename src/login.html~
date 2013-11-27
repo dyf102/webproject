@@ -10,9 +10,37 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <!-- BEGIN HEAD -->
-<head>
+<head><script type="text/javascript">
+function getCookie(c_name)
+{
+var c_value = document.cookie;
+var c_start = c_value.indexOf(" " + c_name + "=");
+if (c_start == -1)
+  {
+  c_start = c_value.indexOf(c_name + "=");
+  }
+if (c_start == -1)
+  {
+  c_value = null;
+  }
+else
+  {
+  c_start = c_value.indexOf("=", c_start) + 1;
+  var c_end = c_value.indexOf(";", c_start);
+  if (c_end == -1)
+  {
+c_end = c_value.length;
+}
+c_value = unescape(c_value.substring(c_start,c_end));
+}
+return c_value;
+}
+var username = getCookie("uname")
+var elem = document.getElementById("username");
+elem.value = username;
+</script>
    <meta charset="utf-8" />
-   <title>Metronic | Login Options - Login Form 2</title>
+   <title>Login Options - Login Form</title>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
    <meta content="" name="description" />
@@ -59,7 +87,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <label class="control-label visible-ie8 visible-ie9">Username</label>
             <div class="input-icon">
                <i class="icon-user"></i>
-               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username"/>
+               <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="username" id ="username"/>
             </div>
          </div>
          <div class="form-group">
@@ -190,7 +218,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
    <!-- END LOGIN -->
    <!-- BEGIN COPYRIGHT -->
    <div class="copyright">
-      2013 &copy; Metronic - Admin Dashboard Template.
+      2013 &copy; 
    </div>
    <!-- END COPYRIGHT -->
    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
