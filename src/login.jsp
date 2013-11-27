@@ -10,8 +10,6 @@
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		String checkLogin = "select * from users where '" + userName + "' = user_name and password = '" + password + "'";
-//out.println(checkLogin);
-
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
      		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 

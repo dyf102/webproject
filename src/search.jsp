@@ -14,7 +14,7 @@ String key = (String)request.getParameter("key");
 if (key == null)
 key = "";
 %>
-<td><input name="KEYWORDS" maxlength="80" type="text" value=<%=key%>></td>
+<td><input name="KEYWORDS" maxlength="80" type="search" value=<%=key%>></td>
 </tr>
 <tr>
 <th>Time Periods:</th>
