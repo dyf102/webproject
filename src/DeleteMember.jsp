@@ -59,15 +59,21 @@
 		rset1 = stmt.executeQuery(checkName1);
 		if (!rset1.next() || friendName.isEmpty())
 			flag1=true;
-		else{	
+		else {
 			rset1 = stmt.executeQuery(getID);
 
 			if (rset1.next())
 				id = rset1.getString(1);
-			String addFriend = "delete from group_lists where group_id =" + id + " and friend_id = '" + friendName +"'";
-			rset1 = stmt.executeQuery(addFriend);
-		}
-			
+			String checkUser = "select * from group_lists where friend_id = '" + friendName + "' and group_id =" + id;
+			rset1 = stmt.executeQuery(checkUser);
+			if (!rset1.next() || friendName.isEmpty())
+				flag1=true;
+			else{	
+				
+				String addFriend = "delete from group_lists where group_id =" + id + " and friend_id = '" + friendName +"'";
+				rset1 = stmt.executeQuery(addFriend);
+			}
+		}	
 		
 	   }
 	     	

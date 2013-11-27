@@ -200,10 +200,10 @@
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Friend Name:</I></B></TD>
 <TD><select name="FriendName">
-    <%	for (int i=0; i<friend_name.size(); i++)
+    <%	for (int i=0; i<user_name.size(); i++)
 	{	%>
 		
-		<option value= "<%=friend_name.get(i)%>"> <%=friend_name.get(i)%></option>
+		<option value= "<%=user_name.get(i)%>"> <%=user_name.get(i)%></option>
 		
 	<%
 	}
