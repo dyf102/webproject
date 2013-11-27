@@ -84,7 +84,7 @@
 
 			if (!username.equals("admin")) {
 	%>
-	<table border="1">
+		<table border="1">
 		<tr>
 			<td><b><%=username%>'s Album</b></td>
 		</tr>
@@ -174,17 +174,15 @@
 
 		<tr>
 			<%
-				/*Group ID ==START==*/
-						imgResult = stmt3.executeQuery(getGroupImg);
+				/*Group subject ==START==*/
+						imgResult = stmt2.executeQuery(getGroupImg);
 						while (imgResult.next()) {
-							String id = String.valueOf(imgResult.getLong(1));
+							String subject = imgResult.getString(2);
 			%>
-			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"> <img
-					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50"
-					HEIGHT="50"></a></td>
+			<td><%=subject%></td>
 			<%
 				}
-						/*Group ID ==END==*/
+						/*Group subject ==END==*/
 			%>
 		</tr>
 
