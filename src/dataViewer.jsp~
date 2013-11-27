@@ -83,7 +83,6 @@
 				</select>
 				Subject:
 				<select name ="subject" >
-					<option value = "all">all</option>
 					<%for(int i = 0;i < subjectNames.size();i++){%>
 						<option value ="<%=subjectNames.get(i)%>"> <%=subjectNames.get(i)%></option>
 					<%}%>
