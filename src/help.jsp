@@ -12,7 +12,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN HEAD -->
 <head>
    <meta charset="utf-8" />
-   <title>DashBoard</title>
+   <title>Help Page</title>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
    <meta content="" name="description" />
@@ -333,7 +333,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <div class="col-md-12">
                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                <h3 class="page-title">
-                  Top Five Images <small>Top Five Images(High To Low)</small>
+                  Help <small>User Manuel</small>
                </h3>
                <ul class="page-breadcrumb breadcrumb">
                   <li class="btn-group">
@@ -353,7 +353,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                      <a href="index.html">Home</a> 
                      <i class="icon-angle-right"></i>
                   </li>
-                  <li><a href="#">Top Five Images</a></li>
+                  <li><a href="#">User Manuel</a></li>
                </ul>
                <!-- END PAGE TITLE & BREADCRUMB-->
             </div>
@@ -362,84 +362,29 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
          <!-- BEGIN PAGE CONTENT-->
          <div class="row">
             <div class="col-md-12">
-            	<%@ page import="java.io.*"%>
-	<%@ page import="java.util.*"%>
-	<%@ page import="java.sql.*"%>
-	<%@ page import="oracle.jdbc.*"%>
-	<%@ page import="java.lang.System"%>
-            <%
-            String username = (String)session.getAttribute("loged_in");
-            	if (username == null) {
-			username = "";
-			%>
-	<p>Unauthorized access</p>
-	<meta http-equiv="refresh" content="1; url = login.html">
-	<%
-		}
-		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-		String m_driverName = "oracle.jdbc.driver.OracleDriver";
+            	<p>User Guideline</p>
 
-		String m_userName = "c391g3";
-		String m_password = "C1234567";
+<p>Chapter 1: Installation</p>
 
-		Connection m_con = null;
-		
-            	String sql = "SELECT PHOTO_ID FROM POPULARITY WHERE COUNT_NUM IN (SELECT * FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC) WHERE ROWNUM <=5 )";
-            	String sql2 = "SELECT SUBJECT FROM POPULARITY p,IMAGES i WHERE p.PHOTO_ID = i.PHOTO_ID AND COUNT_NUM IN (SELECT * FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC) WHERE ROWNUM <=5 )";
-            	try {
-			Class drvClass = Class.forName(m_driverName);
-			DriverManager.registerDriver((Driver) drvClass.newInstance());
-			drvClass.newInstance();
+<p>To install our system, please first open a terminal and type make install;</p>
 
-		} catch (Exception e) {
-			System.err.print("ClassNotFoundException: ");
-			System.err.println(e.getMessage());
+<p>To run our system, please open your brower and input umxx.cs.ualberta.ca:(port number)/webproject</p>
 
-		}
-		try {
+<p>Chapter 2: Module Guideline</p>
 
-			m_con = DriverManager.getConnection(m_url, m_userName,m_password);
-		}
-		catch(Exception e){
-			out.println(e.toString());
-		}
-            %>
-               	<table border="1">
-		<tr>
-	<%
-				/*User's Image ==START==*/
-		Statement stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		ResultSet result2 = stmt.executeQuery(sql);
-				while (result2.next()) {
-					String id = String.valueOf(result2.getLong(1));
-			%>
-			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"><img
-					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="150"
-					HEIGHT="150"></a></td>
-			<%
-				}
-						/*User's Image ==END==*/
-			%>
-		</tr><tr>
-			<%
-				/*User's subject ==START==*/
-		Statement stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		ResultSet imgResult = stmt2.executeQuery(sql2);
-				while (imgResult.next()) {
-					String subject = imgResult.getString(1);
-			%>
-			<td><%=subject%></td>
-			<%
-				/*User's subject ==START==*/
-						}
-			%>
-		</tr>
+<p>Section 1: User Management Module  You are allowed to login from the login page by typing in correct username and password.  If you are new for our system please create an account by clicking &quot;create an account&quot;  when you are creating account please input your full name, email, address, phone number, username and password.</p>
 
+<p>Section 2: Security module  After you logged into our system, there is a guide bar on the left side. by typing &quot;Friend&quot; section you will find a Groups button  Click &quot;Groups&quot; button to enter the group management page.  There are 4 main functions in group management page  1. Create Group  User can create a group by typing a unique group name.  2. Delete Group  User can delete a group by selecting the one that user wants to delete.  When a group is deleted, all images that accociate with this group will set to be private.  3. Add Group Member  User can add a friend into one of user's group by selecting the group name and a friend that has not been added.  4. Delete Group Member  User can delete a friend of group by selecting a group name and a friend name that is in the group.</p>
 
+<p> Each image stored in the system has a unique owner; and the image, as well as its descriptive information, can only be updated and/or removed by its owner.  Each image can be viewed by:</p>
 
-		<tr>
-		</tr>
-                           
+<p> public, i.e., by any user  a designated group, i.e., all users in the group, or  private, i.e., by the owner only</p>
+
+<p>Section 3: Uploading Module  User can use upload section to upload single or multiple photos.  In uploading page, user can chose either to enter all information of the photos or part of it and then select the photo that wants to upload and click submit to finish uploading.</p>
+
+<p>Section 4: Display Module  After login, the Main page will show the most top five popular images.   In Images section, user can view his own Album and modifty all information of his own images. At the same time, user can also view all public images under public album section. Moreover, if user is under some other users' group list, the user will be able to view all images in those groups.</p>
+
+<p>Section 5: Search Module  User can use Search function to search an image.  User can choose either using keywords search or using both keyword and time periods to search.  There are three options to arrange the result  1. most-recent-first  2. most-recent-last  3. relevance</p>
             </div>
          </div>
          <!-- END PAGE CONTENT-->

@@ -3,12 +3,17 @@
 <%@ page import="java.lang.System" %>
 
 <html>
+<head><title><h1>Upload photo</h1></title></head>
 <body>
+<a href="main.jsp">Back to Main</a>
+<p>Hi </p> 
 <%
 		String username = (String)session.getAttribute("loged_in");
 		if(username == null){%>
 			<meta http-equiv="refresh" content="0; url = login.html">
 		<%}
+	%>
+<p>Hi <% = username%> </p>
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";		
 		ArrayList<String> group_id = new ArrayList<String>();
 		ArrayList<String> group_name = new ArrayList<String>();
@@ -52,7 +57,7 @@
               ex.getMessage());
        }
 	%>
-<center><h1>Upload single photo</h1></center>
+<center><h1>Upload photo</h1></center>
 <form action="singleUpload.jsp" method="post" enctype
 ="multipart/form-data" name="form1" id="form1">
 

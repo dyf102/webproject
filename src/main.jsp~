@@ -414,8 +414,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					String id = String.valueOf(result2.getLong(1));
 			%>
 			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"><img
-					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50"
-					HEIGHT="50"></a></td>
+					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="150"
+					HEIGHT="150"></a></td>
 			<%
 				}
 						/*User's Image ==END==*/
