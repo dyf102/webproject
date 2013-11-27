@@ -209,7 +209,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             </li>
 
             <li class="tooltips" data-placement="left" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
-               <a href="help.html" target="_blank">
+               <a href="help.jsp" target="_blank">
                <i class="icon-gift"></i> 
                <span class="title">Help</span>
                </a>
