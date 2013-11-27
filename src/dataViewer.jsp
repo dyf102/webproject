@@ -15,6 +15,13 @@
 <%
 		String username = (String) session.getAttribute("loged_in");
 		
+		if(username == null){%>
+			<meta http-equiv="refresh" content="0; url = login.html">
+		<%}
+		if(!username.equals("admin")){%>
+			<meta http-equiv="refresh" content="0; url = main.jsp">
+		<%}
+		
 		String TABLE_NAME;
 		//query fields initialization
 		TABLE_NAME = "IMAGES";

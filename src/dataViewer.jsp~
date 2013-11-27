@@ -15,6 +15,13 @@
 <%
 		String username = (String) session.getAttribute("loged_in");
 		
+		if(username == null){%>
+			<meta http-equiv="refresh" content="0; url = login.html">
+		<%}
+		if(username.equals("admin")){%>
+			<meta http-equiv="refresh" content="0; url = main.jsp">
+		<%}
+		
 		String TABLE_NAME;
 		//query fields initialization
 		TABLE_NAME = "IMAGES";
@@ -83,6 +90,7 @@
 				</select>
 				Subject:
 				<select name ="subject" >
+					<option value = "all">all</option>
 					<%for(int i = 0;i < subjectNames.size();i++){%>
 						<option value ="<%=subjectNames.get(i)%>"> <%=subjectNames.get(i)%></option>
 					<%}%>

@@ -18,6 +18,13 @@
 <p><b>Data Analysis Center</b></p>
 <%
 		String username_session = (String) session.getAttribute("loged_in");
+		if(username == null){%>
+			<meta http-equiv="refresh" content="0; url = login.html">
+		<%}
+		if(!username.equals("admin")){%>
+			<meta http-equiv="refresh" content="0; url = main.jsp">
+		<%}
+	
 		String username,subject,from,to,frequency;
 		
 		username = request.getParameter("user");
