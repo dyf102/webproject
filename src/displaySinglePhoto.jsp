@@ -36,11 +36,12 @@
 		ArrayList<String> groupNames = new ArrayList<String>();
 
 		/*SQL STATEMENTS*/
-		String getImgSqlStmt = "SELECT PERMITTED,SUBJECT,PLACE,TIMING,DESCRIPTION FROM IMAGES WHERE PHOTO_ID =" +photo_id ;
+		String getImgSqlStmt = "SELECT PERMITTED,SUBJECT,PLACE,TIMING,DESCRIPTION,OWNER_NAME FROM IMAGES WHERE PHOTO_ID =" +photo_id ;
 		String getGroupName = "SELECT GROUP_NAME FROM GROUPS WHERE USER_NAME = '"+username+"'";
 		
 		String getCurrentGroup = "SELECT GROUP_NAME FROM IMAGES A,GROUPS B WHERE A.PERMITTED = B.GROUP_ID AND PHOTO_ID ="+photo_id;
 		/*SQL STATEMENTS*/
+		String owner_name ="";
 		String permission_info ="";
 		String subject_info = "";
 		String place_info = "";
@@ -102,6 +103,9 @@
 				if(imgResult.getString(5) != null){
 					desc_info = imgResult.getString(5);
 				}
+				if(imgResult.getString(6) != null){
+					owner_name = imgResult.getString(6);
+				}
 				
 		%>
 			<img src="displayblob.jsp?photo_id=<%=photo_id%>&type=hd">
@@ -119,8 +123,11 @@
 				Location: <input type = "text" name = "place_info" value =<%=place_info%> ><br>
 				Time: <input type = "text" name = "timing_info" value =<%=timing_info%> ><br>
 				Description: <input type = "text" name = "desc_info" value =<%=desc_info%> ><br>
-				<input type="submit" value = "Update" name ="submit">
-				<input type="submit" value = "Delete" name ="submit">
+				<% if(owner_name.equals(username)){ %>
+				
+					<input type="submit" value = "Update" name ="submit">
+					<input type="submit" value = "Delete" name ="submit">
+				<% } %>
 			</form>
 							
 		<%
