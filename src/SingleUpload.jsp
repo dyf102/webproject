@@ -6,14 +6,13 @@
 <head><title><h1>Upload photo</h1></title></head>
 <body>
 <a href="main.jsp">Back to Main</a>
-<p>Hi </p> 
 <%
 		String username = (String)session.getAttribute("loged_in");
 		if(username == null){%>
 			<meta http-equiv="refresh" content="0; url = login.html">
 		<%}
 	%>
-<p>Hi <% = username%> </p>
+<p>Hi <%=username%> </p>
 <%
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";		
 		ArrayList<String> group_id = new ArrayList<String>();
