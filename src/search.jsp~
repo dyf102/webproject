@@ -26,7 +26,7 @@
 <%
 String key = (String)request.getParameter("key");
 if (key == null)
-	key = "";
+key = "";
 %>
 <td><input name="KEYWORDS" maxlength="80" type="search" value=<%=key%>></td>
 </tr>
