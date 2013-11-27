@@ -3,7 +3,7 @@
 <%@ page import="java.lang.System" %>
 
 <html>
-<head><title><h1>Upload photo</h1></title></head>
+<head><title>Upload photo</title></head>
 <body>
 <a href="main.jsp">Back to Main</a>
 <%

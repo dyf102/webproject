@@ -16,6 +16,7 @@
 	<meta http-equiv="refresh" content="0; url = login.html">
 <%
 }
+%><p>Hi <%=username%></p><%
 		String getGroup = "select group_id, group_name from groups where user_name = '" + username +"'";
 		String getUser = "select user_name from users where user_name <> '" + username + "'";	
 		String getFriend ="select gl.friend_id from group_lists gl, groups g where gl.group_id = g.group_id and g.user_name = '" + username + "'";	

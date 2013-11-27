@@ -1,5 +1,19 @@
+<%@ page import="java.util.*" %> 
+<%@ page import="java.sql.*" %> 
+<%@ page import="java.lang.System" %>
 <http>
-<head><title>Search </title><%String username = (String)session.getAttribute("loged_in");%></head>
+<head><title>Search </title>
+<a href="main.jsp">Back to Main</a>
+<%
+		String username = (String)session.getAttribute("loged_in");
+		if(username == null){
+%>
+	<meta http-equiv="refresh" content="0; url = login.html">
+<%
+}
+%>
+<p>Hi <%=username%> </p>
+</head>
 <body>
 <center>
 <h3>Images Search Engine</h3>
@@ -12,9 +26,9 @@
 <%
 String key = (String)request.getParameter("key");
 if (key == null)
-key = "";
+	key = "";
 %>
-<td><input name="KEYWORDS" maxlength="80" type="text" value=<%=key%>></td>
+<td><input name="KEYWORDS" maxlength="80" type="search" value=<%=key%>></td>
 </tr>
 <tr>
 <th>Time Periods:</th>
@@ -35,7 +49,6 @@ key = "";
 </tr>
 </tbody>
 </table>
-
 </form>
 </center>
 </body>

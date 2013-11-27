@@ -75,21 +75,27 @@
 		%>	
 			<form action = "dataAnalysis.jsp">
 				User:		
-				<select name ="user_info" >
+				<select name ="user" >
 					<%for(int i = 0;i < userNames.size();i++){%>
 						<option value ="<%=userNames.get(i)%>"> <%=userNames.get(i)%></option>
 					<%}%>
 				</select>
 				Subject:
-				<select name ="subject_info" >
+				<select name ="subject" >
 					<%for(int i = 0;i < subjectNames.size();i++){%>
 						<option value ="<%=subjectNames.get(i)%>"> <%=subjectNames.get(i)%></option>
 					<%}%>
-				</select>
+				</select><br><br>
 				From:
 				<input type = "text" name = "from">
 				To:
-				<input type = "text" name = "to">
+				<input type = "text" name = "to"><br><br>
+				Weekly:
+				<input type = "radio" name = "frequency" value ="week">
+				Monthly:
+				<input type = "radio" name = "frequency" value ="month">
+				Yearly:
+				<input type = "radio" name = "frequency" value ="year">
 				<input type = "submit" value = "submit" name = "submit">
 			</form>
 		<%			

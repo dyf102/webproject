@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 </head>
 <a href="main.jsp">Back to Main</a>
+<center>
 <body>
 	<%
 		String username = (String) session.getAttribute("loged_in");
@@ -222,6 +223,6 @@
 				m_con.close();
 			}
 		%>
-	
+	</center>
 </body>
 </html>

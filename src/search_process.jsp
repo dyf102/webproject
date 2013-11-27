@@ -154,6 +154,7 @@
 	        	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, 
                                             ResultSet.CONCUR_READ_ONLY);
 		        rset = stmt.executeQuery(sql);
+		        out.println(sql);
         	}
         	catch(Exception ex){
     	        
