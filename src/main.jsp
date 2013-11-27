@@ -245,10 +245,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
                      <a href="SingleUpload.jsp">
                      Single Upload</a>
                   </li>
-                  <li >
-                     <a href="uploadmulitiimage.html">
-                     Multiple Upload</a>
-                  </li>
                </ul>
             </li>
             <li class="last ">
@@ -337,7 +333,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
             <div class="col-md-12">
                <!-- BEGIN PAGE TITLE & BREADCRUMB-->
                <h3 class="page-title">
-                  Top Five Images <small>Top Five Images</small>
+                  Top Five Images <small>Top Five Images(High To Low)</small>
                </h3>
                <ul class="page-breadcrumb breadcrumb">
                   <li class="btn-group">
@@ -418,8 +414,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					String id = String.valueOf(result2.getLong(1));
 			%>
 			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"><img
-					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50"
-					HEIGHT="50"></a></td>
+					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="150"
+					HEIGHT="150"></a></td>
 			<%
 				}
 						/*User's Image ==END==*/
@@ -452,16 +448,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
    </div>
    <!-- END CONTAINER -->
    <!-- BEGIN FOOTER -->
-   <div class="footer">
-      <div class="footer-inner">
-         2013 &copy; Metronic by keenthemes.
-      </div>
-      <div class="footer-tools">
-         <span class="go-top">
-         <i class="icon-angle-up"></i>
-         </span>
-      </div>
-   </div>
    <!-- END FOOTER -->
    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
    <!-- BEGIN CORE PLUGINS -->   

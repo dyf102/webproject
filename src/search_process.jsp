@@ -177,7 +177,7 @@
 		  	    if (rsetpermit != null && rsetpermit.next()){
 		  	 	results = true;
 				%>
-				<a href="display_image.jsp?photo_id=<%= photo_id %>&username=<%= username %>">
+				<a href="displaySinglePhoto.jsp?photo_id=<%= photo_id %>">
 				<img src="displayblob.jsp?photo_id=<%= photo_id %>&username=<%= username %>&type=thumbnail" WIDTH="50" HEIGHT="50"></a>	<%
 		  	    }
 	    	}
