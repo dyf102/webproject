@@ -73,7 +73,7 @@
 					ResultSet.CONCUR_UPDATABLE);
 			stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-			stmt3 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+			Statement stmt3 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 				
 			if(submit_info.equals("Delete")){
@@ -128,7 +128,7 @@
 					groupIdResult.close();
 				}
 				
-				stmt.close();
+				//stmt.close();
 				m_con.close();	
 			
 			

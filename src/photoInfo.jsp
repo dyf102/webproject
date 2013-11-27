@@ -128,7 +128,7 @@
 					groupIdResult.close();
 				}
 				
-				stmt.close();
+				//stmt.close();
 				m_con.close();	
 			
 			
