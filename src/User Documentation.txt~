@@ -12,7 +12,6 @@ Section 1: User Management Module
 	You are allowed to login from the login page by typing in correct username and password.
 	If you are new for our system please create an account by clicking "create an account"
 	when you are creating account please input your full name, email, address, phone number, username and password.
-	After log into our system, on the right up corner, user can use My Profile button to change his own information.
 
 Section 2: Security module
 	After you logged into our system, there is a guide bar on the left side. by typing "Friend" section you will find a Groups button
