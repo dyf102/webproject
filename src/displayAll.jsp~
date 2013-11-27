@@ -21,7 +21,7 @@
 	<meta http-equiv="refresh" content="1; url = login.html">
 	<%
 		}
-		ArrayList<String> thumbnailArray = new ArrayList<String>();
+		//ArrayList<String> thumbnailArray = new ArrayList<String>();
 		String TABLE_NAME;
 		//query fields initialization
 		TABLE_NAME = "IMAGES";

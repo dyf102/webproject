@@ -7,7 +7,7 @@
 <TITLE>Create Group</TITLE>
 <meta http-equiv=”refresh” content=”30" >
 </HEAD>
-
+<a href="main.jsp">Back to Main</a>
 <BODY>
 <%
 		String username = (String)session.getAttribute("loged_in");
