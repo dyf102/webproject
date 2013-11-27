@@ -41,6 +41,7 @@
 		}
             %>
                	<table border="1">
+		<tr><td><b><%=username%>'s Album</b></td></tr>
 		<tr>
 	<%
 				/*User's Image ==START==*/

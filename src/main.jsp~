@@ -376,10 +376,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<%@ page import="oracle.jdbc.*"%>
 	<%@ page import="java.lang.System"%>
             <%
-            String TABLE_NAME;
-		//query fields initialization
-		TABLE_NAME = "IMAGES";
-
+            String username = (String)session.getAttribute("loged_in");
+            	if (username == null) {
+			username = "";
+			%>
+	<p>Unauthorized access</p>
+	<meta http-equiv="refresh" content="1; url = login.html">
+	<%
+		}
 		String m_url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 		String m_driverName = "oracle.jdbc.driver.OracleDriver";
 
@@ -389,36 +393,32 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		Connection m_con = null;
 		Statement stmt = null;
 		ResultSet imgResult = null;
-            
-            
+            	String sql = "SELECT PHOTO_ID FROM POPULARITY WHERE COUNT_NUM IN (SELECT * FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC) WHERE ROWNUM <=5 )";
+            	String sql2 = "SELECT SUBJECT FROM POPULARITY p,IMAGES i WHERE p.PHOTO_ID = i.PHOTO_ID AND COUNT_NUM IN (SELECT * FROM (SELECT DISTINCT COUNT_NUM FROM POPULARITY  ORDER BY COUNT_NUM DESC) WHERE ROWNUM <=5 )";
             
             %>
             
             
             
-               		<table border="1">
-		<tr>
-			<td><b><%=username%>'s Album</b></td>
-		</tr>
-		<tr>
-			<%
+               	<table border="1">
+		<tr><td><b><%=username%>'s Album</b></td></tr>
+		<tr><%
 				/*User's Image ==START==*/
-						imgResult = stmt.executeQuery(getImgSqlStmt);
+						imgResult = stmt.executeQuery(sql);
 						while (imgResult.next()) {
 							String id = String.valueOf(imgResult.getLong(1));
 			%>
-			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"> <img
+			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"><img
 					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50"
 					HEIGHT="50"></a></td>
 			<%
 				}
 						/*User's Image ==END==*/
 			%>
-		</tr>
-		<tr>
+		</tr><tr>
 			<%
 				/*User's subject ==START==*/
-						imgResult = stmt.executeQuery(getImgSqlStmt);
+						imgResult = stmt.executeQuery(sql2);
 						while (imgResult.next()) {
 							String subject = imgResult.getString(2);
 			%>
@@ -432,28 +432,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 
 
 		<tr>
-			<td><b>Public Album</b></td>
 		</tr>
-		<tr>
-			<%
-				/*PUBLIC IMAGE ==START==*/
-						imgResult = stmt2.executeQuery(getPublicImg);
-						while (imgResult.next()) {
-							String id = String.valueOf(imgResult.getLong(1));
-			%>
-			<td><a href="displaySinglePhoto.jsp?photo_id=<%=id%>"> <img
-					src="displayblob.jsp?photo_id=<%=id%>&type=thumbnail" WIDTH="50"
-					HEIGHT="50"></a></td>
-			<%
-				/*PUBLIC IMAGE ==END==*/
-						}
-			%>
-		</tr>
-               
-               
-               
-               
-               
+                           
             </div>
          </div>
          <!-- END PAGE CONTENT-->
