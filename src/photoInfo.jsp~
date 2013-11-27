@@ -15,15 +15,14 @@
 		
 		String username = (String) session.getAttribute("loged_in");
 		String photo_id = (String) session.getAttribute("photo_id");
-		out.println(username);
-		out.println(photo_id);
-		String subject_info, place_info,timing_info,permission_info,desc_info;
+		String subject_info,place_info,timing_info,permission_info,desc_info,submit_info;
 		
 		permission_info = request.getParameter("permission_info");
 		subject_info = request.getParameter("subject_info");
 		place_info = request.getParameter("place_info");
 		timing_info = request.getParameter("timing_info");
 		desc_info = request.getParameter("desc_info");
+		submit_info = request.getParameter("submit");
 		
 		String TABLE_NAME;
 		//query fields initialization
@@ -37,12 +36,15 @@
 
 		Connection m_con = null;
 		Statement stmt = null;
+		Statement stmt2 = null;
 		ResultSet groupIdResult = null;
+		ResultSet deleteResult = null;
 
 		/*SQL STATEMENTS*/
 		
 		String getGroupID = "SELECT GROUP_ID FROM GROUPS WHERE GROUP_NAME = '"+permission_info+"'AND USER_NAME ='"+username+"' AND USER_NAME IS NOT NULL";
 		String updateInfo = "UPDATE IMAGES SET PERMITTED = ?,SUBJECT = ?, PLACE = ?, TIMING = ?,DESCRIPTION = ? WHERE PHOTO_ID ="+photo_id;
+		String deletePhoto = "DELETE FROM IMAGES WHERE PHOTO_ID ="+ photo_id;
 		
 		
 		/*SQL STATEMENTS*/
@@ -69,7 +71,19 @@
 			
 			stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
-			
+			stmt2 = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+				
+			if(submit_info.equals("Delete")){
+				out.println(deletePhoto);
+				deleteResult = stmt2.executeQuery(deletePhoto);
+				
+				out.println("Delete Successfully");
+				%>
+				<meta http-equiv="refresh" content="1; url = displayAll.jsp">
+				<%
+				return;
+			}		
 			groupIdResult = stmt.executeQuery(getGroupID);
 			
 			if(groupIdResult.next()){

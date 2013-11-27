@@ -119,7 +119,8 @@
 				Location: <input type = "text" name = "place_info" value =<%=place_info%> ><br>
 				Time: <input type = "text" name = "timing_info" value =<%=timing_info%> ><br>
 				Description: <input type = "text" name = "desc_info" value =<%=desc_info%> ><br>
-				<input type="submit" value = "Update">
+				<input type="submit" value = "Update" >
+				<input type="submit" value = "Delete" name ="delete">
 			</form>
 							
 		<%
