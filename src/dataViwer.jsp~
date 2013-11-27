@@ -81,15 +81,21 @@
 					<%}%>
 				</select>
 				Subject:
-				<select name ="subject_info" >
+				<select name ="subject" >
 					<%for(int i = 0;i < subjectNames.size();i++){%>
 						<option value ="<%=subjectNames.get(i)%>"> <%=subjectNames.get(i)%></option>
 					<%}%>
-				</select>
+				</select><br><br>
 				From:
 				<input type = "text" name = "from">
 				To:
-				<input type = "text" name = "to">
+				<input type = "text" name = "to"><br><br>
+				Weekly:
+				<input type = "radio" name = "frequency" value ="week">
+				Monthly:
+				<input type = "radio" name = "frequency" value ="month">
+				Yearly:
+				<input type = "radio" name = "frequency" value ="year">
 				<input type = "submit" value = "submit" name = "submit">
 			</form>
 		<%			
