@@ -9,6 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 </head>
+<a href="main.jsp">Back to Main</a>
 <body>
 <p><b>Data Analysis Center</b></p>
 <%
